@@ -1,0 +1,17 @@
+package cetam.projeto02grupo04.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+    @Controller
+    public class ProdutoController {
+
+        @GetMapping("/")
+        public String index() {
+            return "dashboard"; // Abre a página dashboard.html
+        }
+    }
+
+
+
+
