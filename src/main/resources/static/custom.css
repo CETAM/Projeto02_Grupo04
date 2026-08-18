@@ -43,7 +43,8 @@ a {
     position: sticky;
     top: 0;
     z-index: 100;
-    padding: 15px 5%;
+    padding: 10px 5%;
+    overflow: visible;
 }
 
 .header-container {
@@ -58,12 +59,19 @@ a {
     display: flex;
     align-items: center;
     gap: 12px;
+    overflow: visible;
 }
 
 .logo-img {
-    height: 55px;
-    width: auto;
+    height: 90px !important;       /* Aumentado de 55px para 90px */
+    width: auto !important;
     object-fit: contain;
+    display: block;
+
+    /* Remove a opacidade e realça o contraste/nitidez */
+    opacity: 1 !important;
+    filter: contrast(110%) brightness(102%);
+    mix-blend-mode: multiply;
 }
 
 .nav-menu {
