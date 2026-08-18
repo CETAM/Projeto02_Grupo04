@@ -7,38 +7,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/clientes")
 public class ClienteController {
-
-    private final ClienteRepository clienteRepository;
-
-    public ClienteController(ClienteRepository clienteRepository) {
-        this.clienteRepository = clienteRepository;
-    }
-
-
-    // A página começa em 0 e mostra 5 clientes por página.
     @GetMapping
-    public String carregarClientes(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "5") int size,
-            Model model) {
-
-        Pageable pageable = PageRequest.of(
-                page,
-                size,
-                Sort.by("nome").ascending()
-        );
-
-        Page<Cliente> clientes = clienteRepository.findAll(pageable);
-
-        model.addAttribute("clientes", clientes);
-        model.addAttribute("cliente", new Cliente());
-
         return "clientes/clientes";
     }
 

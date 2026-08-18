@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linda Moda - Detalhes do Produto</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+    <!-- Remixicon -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- CSS estático do Spring -->
+    <link rel="stylesheet" th:href="@{/custom.css}">
+</head>
+<body>
+
+<!-- CABEÇALHO -->
+<header class="header">
+    <div class="header-container">
+        <div class="logo-box">
+<<<<<<< HEAD
+            <img th:src="@{/img/logo.png}" alt="Linda Moda" class="logo-img">
+        </div>
+
+=======
+            <img th:src="@{/img/logo.png}" alt="Linda Moda" class="logo-img" >
+        </div>
+
+
+>>>>>>> 84691fad22a72bea5045625f5315b71a34dd4de7
+        <ul class="nav-menu">
+            <li><a th:href="@{/produtos}">Novas Coleções</a></li>
+            <li><a th:href="@{/produtos}">Vestidos</a></li>
+            <li><a th:href="@{/produtos}">Saias</a></li>
+            <li><a th:href="@{/produtos}">Blusas</a></li>
+            <li><a href="#">Sobre Nós</a></li>
+        </ul>
+
+        <div class="header-icons">
+            <span class="icon-btn"><i class="ri-search-line"></i></span>
+            <span class="icon-btn"><i class="ri-user-line"></i></span>
+            <span class="icon-btn">
+                <i class="ri-shopping-bag-line"></i>
+                <span class="cart-badge">1</span>
+            </span>
+        </div>
+    </div>
+</header>
+
+<!-- CONTEÚDO PRINCIPAL DO PRODUTO -->
+<main class="main-container">
+
+    <!-- GALERIA DE FOTOS -->
+    <section class="product-gallery">
+        <div class="main-image-box">
+            <img id="mainImage" src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80" alt="Produto Principal">
+        </div>
+        <div class="thumbnail-list">
+
+            <!-- 1. VESTIDO -->
+            <div class="thumb active" onclick="selectProduct(this,
+                'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80',
+                'VESTIDO MIDI ROSE - Linda Moda',
+                'R$ 149,90',
+                'O Vestido Midi Rose é elegante e fluído, ideal para eventos e ocasiões especiais. Feito em tecido leve e de caimento impecável, traz sofisticação e conforto na medida certa.')">
+                <img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=200&q=80" alt="Vestido">
+            </div>
+
+            <!-- 2. CALÇA JEANS -->
+            <div class="thumb" onclick="selectProduct(this,
+                'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80',
+                'CALÇA JEANS STYLISH - Linda Moda',
+                'R$ 189,90',
+                'Calça Jeans moderna com apliques e rasgos estilosos. Possui excelente caimento, tecido confortável e alta durabilidade para o dia a dia.')">
+                <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=200&q=80" alt="Calça Jeans">
+            </div>
+
+            <!-- 3. CAMISA/BLUSA (MULHER) -->
+            <div class="thumb" onclick="selectProduct(this,
+                'https://images.unsplash.com/photo-1598554747436-c9293d6a588f?auto=format&fit=crop&w=800&q=80',
+                'CAMISA FEMININA BRANCA - Linda Moda',
+                'R$ 119,90',
+                'Camisa casual branca confeccionada em algodão macio. Uma peça coringa e versátil, perfeita para compor looks modernos e elegantes.')">
+                <img src="https://images.unsplash.com/photo-1598554747436-c9293d6a588f?auto=format&fit=crop&w=200&q=80" alt="Camisa Feminina">
+            </div>
+
+            <!-- 4. BLAZER -->
+            <div class="thumb" onclick="selectProduct(this,
+                'https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?auto=format&fit=crop&w=800&q=80',
+                'BLAZER EXECUTIVO - Linda Moda',
+                'R$ 229,90',
+                'Blazer feminino de alfaiataria com corte impecável e caimento estruturado. Ideal para reuniões de trabalho e ocasiões formais.')">
+                <img src="https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?auto=format&fit=crop&w=200&q=80" alt="Blazer Executivo">
+            </div>
+
+        </div>
+    </section>
+
+    <!-- DETALHES E COMPRA DADOS DINÂMICOS -->
+    <section class="product-info">
+        <h1 class="product-title" id="productTitle">VESTIDO MIDI ROSE - Linda Moda</h1>
+
+        <div class="price-rating-row">
+            <div class="price" id="productPrice">R$ 149,90</div>
+            <div class="rating">
+                <span class="stars">★★★★★</span>
+                <span>(3 avaliações)</span>
+            </div>
+        </div>
+
+        <!-- Tamanho -->
+        <div class="option-group">
+            <div class="option-header">
+                <span>Tamanho: <strong>P</strong></span>
+                <a href="#" class="size-guide-link">Guia de Tamanhos</a>
+            </div>
+            <div class="size-options">
+                <button class="size-btn active">P</button>
+                <button class="size-btn">M</button>
+                <button class="size-btn">G</button>
+                <button class="size-btn">GG</button>
+            </div>
+        </div>
+
+        <!-- Cor -->
+        <div class="option-group">
+            <div class="option-header">
+                <span>Cor: <strong>Variada</strong></span>
+            </div>
+            <div class="color-swatch"></div>
+        </div>
+
+        <!-- Botões de Ação -->
+        <div class="action-buttons">
+            <button class="btn-add-cart">
+                <i class="ri-shopping-bag-3-line"></i> Adicionar ao Carrinho
+            </button>
+            <button class="btn-wishlist">
+                <i class="ri-heart-line"></i> Favoritos
+            </button>
+        </div>
+
+        <!-- Abas Informativas -->
+        <div class="tabs-container">
+            <div class="tabs-header">
+                <span class="tab-item active">Descrição</span>
+                <span class="tab-item">Detalhes</span>
+                <span class="tab-item">Envio</span>
+            </div>
+            <div class="tab-content">
+                <p id="productDescription">O Vestido Midi Rose é elegante e fluído, ideal para eventos e ocasiões especiais. Feito em tecido leve e de caimento impecável, traz sofisticação e conforto na medida certa.</p>
+            </div>
+        </div>
+
+    </section>
+
+</main>
+
+<!-- RODAPÉ DE GARANTIAS -->
+<footer class="footer-guarantees">
+    <div class="guarantee-item">
+        <i class="ri-pix-fill"></i> Pagamento via Pix e Cartão
+    </div>
+    <div class="guarantee-item">
+        <i class="ri-truck-line"></i> Entrega para todo o Brasil
+    </div>
+    <div class="guarantee-item">
+        <i class="ri-shield-check-line"></i> Compra 100% Segura
+    </div>
+</footer>
+
+<!-- RODAPÉ DE ENDEREÇO E CONTATO -->
+<footer class="footer-info" style="background-color: #f8f8f8; padding: 25px 15px; border-top: 1px solid #e0e0e0; text-align: center; color: #333; margin-top: 20px;">
+    <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-around; gap: 20px;">
+        <div style="flex: 1; min-width: 250px;">
+            <h4 style="margin-bottom: 10px; font-family: 'Playfair Display', serif;"><i class="ri-map-pin-line"></i> Endereço da Loja</h4>
+            <p>Av. Djalma Batista, 2568 - Chapada</p>
+            <p>Manaus - AM | CEP: 69050-010</p>
+        </div>
+        <div style="flex: 1; min-width: 250px;">
+            <h4 style="margin-bottom: 10px; font-family: 'Playfair Display', serif;"><i class="ri-phone-line"></i> Central de Atendimento</h4>
+            <p><i class="ri-whatsapp-line"></i> WhatsApp: (92) 99999-8888</p>
+            <p><i class="ri-mail-line"></i> E-mail: contato@lindamoda.com.br</p>
+        </div>
+    </div>
+    <div style="margin-top: 20px; font-size: 0.85rem; color: #777;">
+        &copy; 2026 Linda Moda. Todos os direitos reservados.
+    </div>
+</footer>
+
+<!-- SCRIPT PARA TROCAR IMAGEM, TÍTULO, PREÇO E DESCRIÇÃO -->
+<script>
+    function selectProduct(element, imageUrl, title, price, description) {
+        // Atualiza a imagem principal
+        document.getElementById('mainImage').src = imageUrl;
+
+        // Atualiza os textos do produto do lado direito
+        document.getElementById('productTitle').innerText = title;
+        document.getElementById('productPrice').innerText = price;
+        document.getElementById('productDescription').innerText = description;
+
+        // Destaca a miniatura selecionada com a borda ativa
+        const thumbs = document.querySelectorAll('.thumb');
+        thumbs.forEach(thumb => thumb.classList.remove('active'));
+        element.classList.add('active');
+    }
+</script>
+
+</body>
+</html>
