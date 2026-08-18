@@ -1,7 +1,5 @@
 package cetam.projeto02grupo04.controller;
 
-import cetam.projeto02grupo04.model.Cliente;
-import cetam.projeto02grupo04.repository.ClienteRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
