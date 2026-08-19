@@ -1,1 +1,0 @@
-Salvar na pasta DB os arquivos .sql utlizandos no desenvolvimento físico do DB
