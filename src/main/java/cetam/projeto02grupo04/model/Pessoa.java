@@ -1,5 +1,5 @@
 package cetam.projeto02grupo04.model;
-
+//teste
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 

@@ -1,7 +1,6 @@
-package com.loja.roupas.controller;
+package cetam.projeto02grupo04.controller;
 
-import com.loja.roupas.model.Endereco;
-import com.loja.roupas.repository.EnderecoRepository;
+import cetam.projeto02grupo04.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
