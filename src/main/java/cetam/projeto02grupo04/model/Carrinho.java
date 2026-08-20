@@ -9,18 +9,13 @@ public class Carrinho {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_carrinho")
     private Long idCarrinho;
 
-  
-   
-    @JoinColumn(name = "id_pessoa")
-    private Pessoa pessoa;
+    private Long idPessoa;
 
-    @Column(name = "data_criacao")
     private LocalDateTime dataCriacao;
 
-  
+    // Getters e Setters
     public Long getIdCarrinho() {
         return idCarrinho;
     }
@@ -29,12 +24,12 @@ public class Carrinho {
         this.idCarrinho = idCarrinho;
     }
 
-    public Pessoa getPessoa() {
-        return pessoa;
+    public Long getIdPessoa() {
+        return idPessoa;
     }
 
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
+    public void setIdPessoa(Long idPessoa) {
+        this.idPessoa = idPessoa;
     }
 
     public LocalDateTime getDataCriacao() {
