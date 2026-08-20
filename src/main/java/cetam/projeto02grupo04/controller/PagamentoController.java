@@ -10,7 +10,7 @@ public class PagamentoController {
 
     // Exibe a tela de checkout/pagamento para um pedido específico
     @GetMapping("/novo/{idPedido}")
-    public String exibirFormularioPagamento(@PathVariable Integer idPedido, Model model) {
+    public String exibirFormularioPagamento(@PathVariable Long idPedido, Model model) {
         PagamentoForm form = new PagamentoForm();
         form.setIdPedido(idPedido);
 
