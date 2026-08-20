@@ -1,6 +1,6 @@
 package cetam.projeto02grupo04.model;
 
-mport jakarta.persistence.*;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -11,7 +11,7 @@ public class Pagamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_pagamento")
-    private Integer id;
+    private Long id;
 
     // Relacionamento 1 para 1 com Pedido (chave estrangeira id_pedido)
     @OneToOne
