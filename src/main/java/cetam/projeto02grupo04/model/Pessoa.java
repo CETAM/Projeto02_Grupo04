@@ -9,23 +9,25 @@ public class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "tipo_usuario", nullable = false)
     private String tipo;
 
-    @Column(nullable = false)
+    @Column(name = "nome", nullable = false)
     private String nome;
 
-    @Column(nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(nullable = false)
+    @Column(name = "senha", nullable = false)
     private String senha;
 
-    @Column(name = "cpf_cnpj", nullable = false)
+    @Column(name = "documento", nullable = false)
     private String cpfCnpj;
 
+    @Column(name = "telefone")
     private String telefone;
 
     @Column(name = "data_cadastro")
