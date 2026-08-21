@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/itens-carrinho")
-public class giItemCarrinhoController {
+public class ItemCarrinhoController {
 
     @Autowired
     private ItemCarrinhoRepository repository;
