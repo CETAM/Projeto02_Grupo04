@@ -35,6 +35,19 @@ public class Entrega {
     @Column(name = "codigo_rastreio", length = 50)
     private String codigoRastreio;
 
+    // Enum responsável pelos possíveis status da entrega
+    public enum StatusEntrega {
+
+        // Status inicial da entrega, logo após a criação do pedido
+        EM_PROCESSAMENTO,
+
+        // Status quando a entrega já saiu para o transporte
+        ENVIADO,
+
+        // Status quando a entrega foi concluída e recebida pelo cliente
+        ENTREGUE
+    }
+
     // Construtor vazio
     public Entrega() {
     }
