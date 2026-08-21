@@ -1,5 +1,6 @@
 package cetam.projeto02grupo04.model;
 
+<<<<<<< HEAD
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 
@@ -77,3 +78,7 @@ public class ItemPedido {
         this.precoUnitario = precoUnitario;
     }
 }
+=======
+public class ItemPedido {
+}
+>>>>>>> 09df01d9a67ed011eaa00f07b23fbb59862fc745
