@@ -9,13 +9,16 @@ public class Carrinho {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_carrinho")
     private Long idCarrinho;
 
+    @Column(name = "id_pessoa", nullable = false)
     private Long idPessoa;
 
+    @Column(name = "data_criacao")
     private LocalDateTime dataCriacao;
 
-    // Getters e Setters
+ 
     public Long getIdCarrinho() {
         return idCarrinho;
     }

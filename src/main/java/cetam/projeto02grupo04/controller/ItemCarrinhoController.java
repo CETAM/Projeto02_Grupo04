@@ -1,7 +1,7 @@
 package cetam.projeto02grupo04.controller;
 
 import cetam.projeto02grupo04.model.ItemCarrinho;
-import cetam.projeto02grupo04.repository.ItemCarrinhoRepository;
+import cetam.projeto02grupo04.service.ItemCarrinhoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/itens-carrinho")
-public class giItemCarrinhoController {
+public class ItemCarrinhoController {
 
     @Autowired
-    private ItemCarrinhoRepository repository;
+    private ItemCarrinhoService service;
 
     @PostMapping("/salvar")
     public String salvar(ItemCarrinho itemCarrinho) {
-        repository.save(itemCarrinho);
+        service.salvar(itemCarrinho);
         return "redirect:/carrinhos";
     }
 }

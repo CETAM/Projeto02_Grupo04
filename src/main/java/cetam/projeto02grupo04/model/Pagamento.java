@@ -42,8 +42,9 @@ public class Pagamento {
     }
 
     // Getters e Setters
-    public Integer getId() { return id; }
-    public void setId(Integer id) { this.id = id; }
+    // Getters e Setters do ID corrigidos para Long
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
     public Pedido getPedido() { return pedido; }
     public void setPedido(Pedido pedido) { this.pedido = pedido; }

@@ -16,9 +16,9 @@ public class PedidoController {
 
     // Listar todos os pedidos na página
     @GetMapping
-    public String listar(Model model) {
+    public String listarPedidos(Model model) {
         model.addAttribute("pedidos", service.listarTodos());
-        return "pedidos/lista"; // Retorna o caminho da sua página HTML/Thymeleaf
+        return "pedidos"; // Aponta para o arquivo pedidos.html na raiz de templates
     }
 
     // Salvar ou atualizar o pedido

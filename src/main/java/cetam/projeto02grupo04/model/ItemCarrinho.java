@@ -8,14 +8,16 @@ public class ItemCarrinho {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_item_carrinho")
     private Long idItemCarrinho;
 
-    @Column(name = "id_carrinho")
+    @Column(name = "id_carrinho", nullable = false)
     private Long idCarrinho;
 
-    @Column(name = "id_produto")
+    @Column(name = "id_produto", nullable = false)
     private Long idProduto;
 
+    @Column(nullable = false)
     private Integer quantidade;
 
     // Getters e Setters
