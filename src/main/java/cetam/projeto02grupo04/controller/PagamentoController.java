@@ -13,16 +13,16 @@ public class PagamentoController {
     // Exibe a tela de checkout/pagamento para um pedido específico
     @GetMapping("/novo/{idPedido}")
     public String exibirFormularioPagamento(@PathVariable Long idPedido, Model model) {
-        PagamentoForm form = new PagamentoForm();
+        FormadePagamento form = new FormadePagamento();
         form.setIdPedido(idPedido);
 
-        model.addAttribute("pagamentoForm", form);
+        model.addAttribute("FormadePagamento", form);
         return "pagamento/formulario";
     }
 
     // Processa o pagamento enviado pelo usuário
     @PostMapping("/processar")
-    public String processarPagamento(@ModelAttribute("pagamentoForm") PagamentoForm form, RedirectAttributes redirectAttributes) {
+    public String processarPagamento(@ModelAttribute("FormadePagamento") FormadePagamento form, RedirectAttributes redirectAttributes) {
         try {
             pagamentoService.realizarPagamento(form);
             redirectAttributes.addFlashAttribute("mensagemSucesso", "Pagamento aprovado com sucesso!");
