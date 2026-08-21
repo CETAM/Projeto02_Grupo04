@@ -1,5 +1,6 @@
 package cetam.projeto02grupo04.repository;
 
+<<<<<<< HEAD
 import cetam.projeto02grupo04.model.ItemPedido;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -9,4 +10,7 @@ import java.util.List;
 public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Long> {
 
     List<ItemPedido> findByPedidoId(Long pedidoId);
+=======
+public interface ItemPedidoRepository {
+>>>>>>> 09df01d9a67ed011eaa00f07b23fbb59862fc745
 }
