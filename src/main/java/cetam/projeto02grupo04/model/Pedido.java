@@ -11,13 +11,13 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_pedido")
-    private Long id;
+    private Long idPedido;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_pessoa", nullable = false)
     private Pessoa pessoa;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_endereco", nullable = false)
     private Endereco endereco;
 
@@ -28,25 +28,29 @@ public class Pedido {
     @Column(name = "status_pedido")
     private StatusPedido statusPedido;
 
-    @Column(name = "valor_total", nullable = false)
+    @Column(name = "valor_total", nullable = false, precision = 10, scale = 2)
     private BigDecimal valorTotal;
 
-    // Enum para o status do pedido
+    // Enum interno para mapear o status_pedido
     public enum StatusPedido {
-        Pendente, Pago, Enviado, Entregue, Cancelado
+        Pendente,
+        Pago,
+        Enviado,
+        Entregue,
+        Cancelado
     }
 
-    // Construtores
+    // Construtor padrão
     public Pedido() {
     }
 
     // Getters e Setters
-    public Long getId() {
-        return id;
+    public Long getIdPedido() {
+        return idPedido;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdPedido(Long idPedido) {
+        this.idPedido = idPedido;
     }
 
     public Pessoa getPessoa() {

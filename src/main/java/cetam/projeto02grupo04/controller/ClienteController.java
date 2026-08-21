@@ -1,29 +1,65 @@
 package cetam.projeto02grupo04.controller;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Controller;
+import cetam.projeto02grupo04.model.Pessoa;
+import cetam.projeto02grupo04.repository.PessoaRepository;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/clientes")
+@CrossOrigin(origins = "*")
 public class ClienteController {
+
+    private final PessoaRepository pessoaRepository;
+
+    public ClienteController(PessoaRepository pessoaRepository) {
+        this.pessoaRepository = pessoaRepository;
+    }
+
     @GetMapping
-        return "clientes/clientes";
+    public List<Pessoa> listarClientes() {
+        return pessoaRepository.findByTipoIgnoreCase("Cliente");
     }
 
-    // Cadastra um novo cliente.
-    @PostMapping("/salvar")
-    public String salvarCliente(@ModelAttribute Cliente cliente) {
-        clienteRepository.save(cliente);
-        return "redirect:/clientes";
+    @GetMapping("/{id}")
+    public ResponseEntity<Pessoa> buscarCliente(@PathVariable Long id) {
+        return pessoaRepository.findById(id)
+                .filter(pessoa -> pessoa.getTipo().equalsIgnoreCase("Cliente"))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    // Exclui um cliente pelo ID.
-    @GetMapping("/excluir/{id}")
-    public String excluirCliente(@PathVariable Long id) {
-        clienteRepository.deleteById(id);
-        return "redirect:/clientes";
+    @PostMapping
+    public Pessoa cadastrarCliente(@RequestBody Pessoa pessoa) {
+        pessoa.setId(null);
+        pessoa.setTipo("Cliente");
+        return pessoaRepository.save(pessoa);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Pessoa> atualizarCliente(@PathVariable Long id, @RequestBody Pessoa dados) {
+        return pessoaRepository.findById(id)
+                .filter(pessoa -> pessoa.getTipo().equalsIgnoreCase("Cliente"))
+                .map(pessoa -> {
+                    pessoa.setNome(dados.getNome());
+                    pessoa.setEmail(dados.getEmail());
+                    pessoa.setSenha(dados.getSenha());
+                    pessoa.setCpfCnpj(dados.getCpfCnpj());
+                    pessoa.setTelefone(dados.getTelefone());
+                    return ResponseEntity.ok(pessoaRepository.save(pessoa));
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluirCliente(@PathVariable Long id) {
+        return pessoaRepository.findById(id)
+                .filter(pessoa -> pessoa.getTipo().equalsIgnoreCase("Cliente"))
+                .map(pessoa -> {
+                    pessoaRepository.delete(pessoa);
+                    return ResponseEntity.noContent().<Void>build();
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
 }

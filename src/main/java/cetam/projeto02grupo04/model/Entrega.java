@@ -1,25 +1,24 @@
 package cetam.projeto02grupo04.model;
 
 import jakarta.persistence.*;
-
 import java.util.Date;
 
 @Entity
 @Table(name = "entrega")
 public class Entrega {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_entrega")
     private Long idEntrega;
 
-    // Ajuste o import/pacote de Pessoa e Endereco caso sejam diferentes no seu projeto
     @ManyToOne
     @JoinColumn(name = "id_pessoa", nullable = false)
     private Pessoa pessoa;
 
     @ManyToOne
     @JoinColumn(name = "id_endereco", nullable = false)
-    private String endereco;
+    private String idEndereco;
 
     @Column(name = "data_envio")
     private Date dataEnvio;
@@ -36,22 +35,20 @@ public class Entrega {
     @Column(name = "codigo_rastreio", length = 50)
     private String codigoRastreio;
 
+    // Construtor vazio
     public Entrega() {
     }
 
-    public Entrega(Long idEntrega, Pessoa pessoa, String endereco, Date dataEnvio, Date dataEntregaPrevista, Date dataEntregaRealizada, String statusEntrega, String codigoRastreio) {
+    public Entrega(Long idEntrega, Pessoa pessoa, String idEndereco, Date dataEnvio, Date dataEntregaPrevista, Date dataEntregaRealizada, String statusEntrega, String codigoRastreio) {
         this.idEntrega = idEntrega;
         this.pessoa = pessoa;
-        this.endereco = endereco;
+        this.idEndereco = idEndereco;
         this.dataEnvio = dataEnvio;
-        this.dataEntregaPrevista = dataEntregaPrevista;
         this.dataEntregaPrevista = dataEntregaPrevista;
         this.dataEntregaRealizada = dataEntregaRealizada;
         this.statusEntrega = statusEntrega;
         this.codigoRastreio = codigoRastreio;
     }
-
-    // ---------- Getters e Setters ----------
 
     public Long getIdEntrega() {
         return idEntrega;
@@ -69,35 +66,35 @@ public class Entrega {
         this.pessoa = pessoa;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
+    public String getIdEndereco() {
+        return idEndereco;
     }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+    public void setIdEndereco(String idEndereco) {
+        this.idEndereco = idEndereco;
     }
 
-    public LocalDateTime getDataEnvio() {
+    public Date getDataEnvio() {
         return dataEnvio;
     }
 
-    public void setDataEnvio(LocalDateTime dataEnvio) {
+    public void setDataEnvio(Date dataEnvio) {
         this.dataEnvio = dataEnvio;
     }
 
-    public LocalDate getDataEntregaPrevista() {
+    public Date getDataEntregaPrevista() {
         return dataEntregaPrevista;
     }
 
-    public void setDataEntregaPrevista(LocalDate dataEntregaPrevista) {
+    public void setDataEntregaPrevista(Date dataEntregaPrevista) {
         this.dataEntregaPrevista = dataEntregaPrevista;
     }
 
-    public LocalDateTime getDataEntregaRealizada() {
+    public Date getDataEntregaRealizada() {
         return dataEntregaRealizada;
     }
 
-    public void setDataEntregaRealizada(LocalDateTime dataEntregaRealizada) {
+    public void setDataEntregaRealizada(Date dataEntregaRealizada) {
         this.dataEntregaRealizada = dataEntregaRealizada;
     }
 
@@ -116,5 +113,4 @@ public class Entrega {
     public void setCodigoRastreio(String codigoRastreio) {
         this.codigoRastreio = codigoRastreio;
     }
-
 }
