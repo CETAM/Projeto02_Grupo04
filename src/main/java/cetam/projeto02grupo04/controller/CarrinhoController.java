@@ -1,7 +1,7 @@
 package cetam.projeto02grupo04.controller;
 
 import cetam.projeto02grupo04.model.Carrinho;
-import cetam.projeto02grupo04.service.CarrinhoService;
+import cetam.projeto02grupo04.services.CarrinhoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;

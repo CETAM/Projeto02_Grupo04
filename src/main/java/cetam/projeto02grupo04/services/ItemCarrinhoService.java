@@ -1,9 +1,9 @@
-package cetam.projeto02grupo04.service;
+package cetam.projeto02grupo04.services;
 
 import cetam.projeto02grupo04.model.ItemCarrinho;
 import cetam.projeto02grupo04.repository.ItemCarrinhoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Services;
 
 @Service
 public class ItemCarrinhoService {

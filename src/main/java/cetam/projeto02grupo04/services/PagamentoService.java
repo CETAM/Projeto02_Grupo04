@@ -1,5 +1,5 @@
 
-package cetam.projeto02grupo04.service;
+package cetam.projeto02grupo04.services;
 
 import cetam.projeto02grupo04.model.Pagamento;
 import cetam.projeto02grupo04.model.PagamentoForm;
