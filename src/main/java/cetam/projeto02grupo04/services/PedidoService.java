@@ -1,4 +1,4 @@
-package cetam.projeto02grupo04.service;
+package cetam.projeto02grupo04.services;
 
 import cetam.projeto02grupo04.model.Pedido;
 import cetam.projeto02grupo04.repository.PedidoRepository;
