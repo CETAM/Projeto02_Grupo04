@@ -1,66 +1,54 @@
 package cetam.projeto02grupo04.controller;
 
 import cetam.projeto02grupo04.model.Endereco;
-import cetam.projeto02grupo04.repository.EnderecoRepository;
+import cetam.projeto02grupo04.model.Endereco;
+import cetam.projeto02grupo04.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/enderecos")
+@RequestMapping("/enderecos")
 public class EnderecoController {
 
     @Autowired
-    private EnderecoRepository enderecoRepository;
+    private EnderecoService service;
 
-    // 1. Listar todos os endereços
     @GetMapping
     public List<Endereco> listarTodos() {
-        return enderecoRepository.findAll();
+        return service.listarTodos();
     }
 
-    // 2. Buscar endereços por ID da Pessoa
-    @GetMapping("/pessoa/{idPessoa}")
-    public List<Endereco> buscarPorPessoa(@PathVariable Long idPessoa) {
-        return enderecoRepository.findByPessoaIdPessoa(idPessoa);
-    }
-
-    // 3. Cadastrar novo endereço
-    @PostMapping
-    public ResponseEntity<Endereco> criar(@RequestBody Endereco endereco) {
-        Endereco novoEndereco = enderecoRepository.save(endereco);
-        return ResponseEntity.status(HttpStatus.CREATED).body(novoEndereco);
-    }
-
-    // 4. Atualizar endereço
-    @PutMapping("/{id}")
-    public ResponseEntity<Endereco> atualizar(@PathVariable Long id, @RequestBody Endereco enderecoAtualizado) {
-        return enderecoRepository.findById(id)
-                .map(end -> {
-                    end.setCep(enderecoAtualizado.getCep());
-                    end.setRua(enderecoAtualizado.getRua());
-                    end.setNumero(enderecoAtualizado.getNumero());
-                    end.setComplemento(enderecoAtualizado.getComplemento());
-                    end.setBairro(enderecoAtualizado.getBairro());
-                    end.setCidade(enderecoAtualizado.getCidade());
-                    end.setEstado(enderecoAtualizado.getEstado());
-                    end.setTipoEndereco(enderecoAtualizado.getTipoEndereco());
-                    Endereco salvo = enderecoRepository.save(end);
-                    return ResponseEntity.ok(salvo);
-                })
+    @GetMapping("/{id}")
+    public ResponseEntity<Endereco> buscarPorId(@PathVariable Long id) {
+        return service.buscarPorId(id)
+                .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // 5. Deletar endereço
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        if (!enderecoRepository.existsById(id)) {
+    @PostMapping
+    public Endereco cadastrar(@RequestBody Endereco endereco) {
+        return service.salvar(endereco);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Endereco> atualizar(@PathVariable Long id, @RequestBody Endereco enderecoDetalhes) {
+        if (!service.existePorId(id)) {
             return ResponseEntity.notFound().build();
         }
-        enderecoRepository.deleteById(id);
+        enderecoDetalhes.setId(id);
+        Endereco atualizado = service.salvar(enderecoDetalhes);
+        return ResponseEntity.ok(atualizado);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        if (!service.existePorId(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        service.deletar(id);
         return ResponseEntity.noContent().build();
     }
 }

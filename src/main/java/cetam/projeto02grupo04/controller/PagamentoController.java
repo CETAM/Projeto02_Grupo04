@@ -1,5 +1,3 @@
-package cetam.projeto02grupo04.controller;
-
 @Controller
 @RequestMapping("/pagamentos")
 public class PagamentoController {
@@ -33,4 +31,3 @@ public class PagamentoController {
         }
     }
 }
-  
