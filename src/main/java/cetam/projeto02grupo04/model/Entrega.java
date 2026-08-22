@@ -34,8 +34,20 @@ public class Entrega {
     @Column(name = "codigo_rastreio")
     private String codigoRastreio;
 
-    // Construtores
-    public Entrega() {}
+    // Construtor vazio
+    public Entrega() {
+    }
+
+    public Entrega(Long idEntrega, Pessoa pessoa, String idEndereco, Date dataEnvio, Date dataEntregaPrevista, Date dataEntregaRealizada, String statusEntrega, String codigoRastreio) {
+        this.idEntrega = idEntrega;
+        this.pessoa = pessoa;
+        this.idEndereco = idEndereco;
+        this.dataEnvio = dataEnvio;
+        this.dataEntregaPrevista = dataEntregaPrevista;
+        this.dataEntregaRealizada = dataEntregaRealizada;
+        this.statusEntrega = statusEntrega;
+        this.codigoRastreio = codigoRastreio;
+    }
 
     // Getters e Setters
     public Long getId() { return id; }

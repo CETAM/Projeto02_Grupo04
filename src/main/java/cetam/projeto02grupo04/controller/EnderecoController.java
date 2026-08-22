@@ -1,6 +1,7 @@
 package cetam.projeto02grupo04.controller;
 
 import cetam.projeto02grupo04.model.Endereco;
+import cetam.projeto02grupo04.model.Endereco;
 import cetam.projeto02grupo04.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

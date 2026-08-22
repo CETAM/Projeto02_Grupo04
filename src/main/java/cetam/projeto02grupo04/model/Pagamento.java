@@ -20,7 +20,7 @@ public class Pagamento {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "forma_pagamento", nullable = false)
-    private FormaPagamento formaPagamento;
+    private FormadePagamento formaPagamento;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status_pagamento")
@@ -35,9 +35,9 @@ public class Pagamento {
     // Construtores
     public Pagamento() {}
 
-    public Pagamento(Pedido pedido, FormaPagamento formaPagamento, BigDecimal valorPago) {
+    public Pagamento(Pedido pedido, FormadePagamento formadePagamento, BigDecimal valorPago) {
         this.pedido = pedido;
-        this.formaPagamento = formaPagamento;
+        this.FormadePagamento = FormadePagamento;
         this.valorPago = valorPago;
     }
 
@@ -49,8 +49,8 @@ public class Pagamento {
     public Pedido getPedido() { return pedido; }
     public void setPedido(Pedido pedido) { this.pedido = pedido; }
 
-    public FormaPagamento getFormaPagamento() { return formaPagamento; }
-    public void setFormaPagamento(FormaPagamento formaPagamento) { this.formaPagamento = formaPagamento; }
+    public FormadePagamento getFormadePagamento() { return FormaPdeagamento; }
+    public void setFormadePagamento(FormadePagamento formaPagamento) { this.FormadePagamento = FormadePagamento; }
 
     public StatusPagamento getStatusPagamento() { return statusPagamento; }
     public void setStatusPagamento(StatusPagamento statusPagamento) { this.statusPagamento = statusPagamento; }
