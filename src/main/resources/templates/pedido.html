@@ -1,11 +1,70 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Gerenciamento de Pedidos - Linda Moda</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; background-color: #f9f6f0; color: #333; }
+        h1, h2 { color: #8b5a2b; }
+        form { background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); width: 300px; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input { width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        button { background-color: #a86f4c; color: white; border: none; padding: 10px 15px; margin-top: 15px; cursor: pointer; border-radius: 4px; width: 100%; }
+        button:hover { background-color: #8b5a2b; }
+        table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: center; }
+        th { background-color: #a86f4c; color: white; }
+        a.btn-excluir { color: #d9534f; text-decoration: none; font-weight: bold; }
+        a.btn-excluir:hover { text-decoration: underline; }
+    </style>
 </head>
 <body>
+
 <h1>Controle de Pedidos e Vendas</h1>
 <p>Área de monitoramento dos pedidos e estoque.</p>
+
+<hr>
+
+<h2>Cadastrar Novo Pedido</h2>
+<form action="/pedidos/salvar" method="POST">
+    <label>ID da Pessoa:</label>
+    <input type="number" name="idPessoa" required>
+
+    <label>ID do Endereço:</label>
+    <input type="number" name="idEndereco" required>
+
+    <label>Valor Total (R$):</label>
+    <input type="text" name="valorTotal" required placeholder="Ex: 150.00">
+
+    <button type="submit">Salvar Pedido</button>
+</form>
+
+<h2>Lista de Pedidos Cadastrados</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID do Pedido</th>
+        <th>ID Pessoa</th>
+        <th>ID Endereço</th>
+        <th>Status</th>
+        <th>Valor Total</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- O Thymeleaf vai preencher esta tabela automaticamente com os dados do banco -->
+    <tr th:each="p : ${pedidos}">
+        <td th:text="${p.id}">1</td>
+        <td th:text="${p.idPessoa}">1</td>
+        <td th:text="${p.idEndereco}">1</td>
+        <td th:text="${p.statusPedido}">Pendente</td>
+        <td th:text="${p.valorTotal}">0.00</td>
+        <td>
+            <a class="btn-excluir" th:href="@{/pedidos/deletar/{id}(id=${p.id})}">Excluir</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 </body>
 </html>
