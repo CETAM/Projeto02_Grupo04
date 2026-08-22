@@ -20,7 +20,7 @@ public class Pagamento {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "forma_pagamento", nullable = false)
-    private FormadePagamento formaPagamento;
+    private FormadePagamento FormadePagamento;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status_pagamento")
@@ -42,13 +42,13 @@ public class Pagamento {
     }
 
     // Getters e Setters
-    public Integer getId() { return id; }
-    public void setId(Integer id) { this.id = id; }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
     public Pedido getPedido() { return pedido; }
     public void setPedido(Pedido pedido) { this.pedido = pedido; }
 
-    public FormadePagamento getFormadePagamento() { return FormaPdeagamento; }
+    public FormadePagamento getFormadePagamento() { return FormadePagamento; }
     public void setFormadePagamento(FormadePagamento formaPagamento) { this.FormadePagamento = FormadePagamento; }
 
     public StatusPagamento getStatusPagamento() { return statusPagamento; }

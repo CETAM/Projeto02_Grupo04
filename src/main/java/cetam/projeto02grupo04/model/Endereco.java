@@ -1,4 +1,7 @@
 package cetam.projeto02grupo04.model;
+
+import jakarta.persistence.*;
+
 @Entity
 @Table(name = "endereco")
 public class Endereco {
@@ -36,7 +39,7 @@ public class Endereco {
     @Column(name = "tipo_endereco")
     private String tipoEndereco;
 
-    // Construtor Vazio
+
     public Endereco() {}
 
     // Getters e Setters
