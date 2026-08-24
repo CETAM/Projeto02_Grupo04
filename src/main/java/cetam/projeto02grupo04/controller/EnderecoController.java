@@ -1,7 +1,7 @@
 package cetam.projeto02grupo04.controller;
 
 import cetam.projeto02grupo04.model.Endereco;
-import cetam.projeto02grupo04.services.EnderecoService;
+import cetam.projeto02grupo04.services.EnderecoServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ import java.util.List;
 public class EnderecoController {
 
     @Autowired
-    private EnderecoService service;
+    private EnderecoServices service;
 
     @GetMapping
     public List<Endereco> listarTodos() {

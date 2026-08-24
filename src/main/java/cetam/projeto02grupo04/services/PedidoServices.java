@@ -1,7 +1,7 @@
 package cetam.projeto02grupo04.services;
 
-import cetam.projeto02grupo04.model.Endereco;
-import cetam.projeto02grupo04.repository.EnderecoRepository;
+import cetam.projeto02grupo04.model.Pedido;
+import cetam.projeto02grupo04.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,25 +9,21 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EnderecoService {
+public class PedidoServices {
 
     @Autowired
-    private EnderecoRepository repository;
+    private PedidoRepository repository;
 
-    public List<Endereco> listarTodos() {
+    public List<Pedido> listarTodos() {
         return repository.findAll();
     }
 
-    public Optional<Endereco> buscarPorId(Long id) {
+    public Optional<Pedido> buscarPorId(Long id) {
         return repository.findById(id);
     }
 
-    public List<Endereco> buscarPorPessoa(Long idPessoa) {
-        return repository.findByIdPessoa(idPessoa);
-    }
-
-    public Endereco salvar(Endereco endereco) {
-        return repository.save(endereco);
+    public Pedido salvar(Pedido pedido) {
+        return repository.save(pedido);
     }
 
     public void deletar(Long id) {

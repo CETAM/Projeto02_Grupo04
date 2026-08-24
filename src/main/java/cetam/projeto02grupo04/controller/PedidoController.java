@@ -1,7 +1,7 @@
 package cetam.projeto02grupo04.controller;
 
 import cetam.projeto02grupo04.model.Pedido;
-import cetam.projeto02grupo04.services.PedidoService;
+import cetam.projeto02grupo04.services.PedidoServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class PedidoController {
 
     @Autowired
-    private PedidoService service;
+    private PedidoServices service;
 
     // Listar todos os pedidos na página
     @GetMapping

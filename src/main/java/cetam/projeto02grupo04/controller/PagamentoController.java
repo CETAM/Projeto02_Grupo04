@@ -1,10 +1,17 @@
+import cetam.projeto02grupo04.model.FormadePagamento;
+import cetam.projeto02grupo04.services.PagamentoServices;
+import ch.qos.logback.core.model.Model;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 @Controller
 @RequestMapping("/pagamentos")
 public class PagamentoController {
 
-    private final PagamentoService pagamentoService;
+    private final PagamentoServices pagamentoService;
 
-    public PagamentoController(PagamentoService pagamentoService) {
+    public PagamentoController(PagamentoServices pagamentoService) {
         this.pagamentoService = pagamentoService;
     }
 
