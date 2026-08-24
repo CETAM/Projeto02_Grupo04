@@ -1,3 +1,16 @@
+import org.springframework.stereotype.Controller;
+import cetam.projeto02grupo04.services.PagamentoService;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+// Import da sua classe Model (ajuste o pacote de acordo com a sua estrutura):
+import cetam.projeto02grupo04.model.FormadePagamento;
+
 @Controller
 @RequestMapping("/pagamentos")
 public class PagamentoController {
