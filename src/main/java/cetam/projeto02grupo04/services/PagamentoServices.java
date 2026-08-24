@@ -24,7 +24,7 @@ public class PagamentoServices {
 
         Pagamento pagamento = new Pagamento();
         pagamento.setPedido(pedido);
-        pagamento.setFormaPagamento(form.getFormaPagamento());
+        pagamento.setFormaPagamento(form.getFormadePagamento());
         pagamento.setValorPago(form.getValor());
 
         pagamentoRepository.save(pagamento);

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class PagamentoForm {
     private Long idPedido;
-    private FormaPagamento formaPagamento;
+    private FormadePagamento FormadePagamento;
     private BigDecimal valor;
 
     public Long getIdPedido() {
@@ -15,12 +15,11 @@ public class PagamentoForm {
         this.idPedido = idPedido;
     }
 
-    public FormaPagamento getFormaPagamento() {
-        return formaPagamento;
+    public FormadePagamento getFormadePagamento() {
+        return FormadePagamento;
     }
-
-    public void setFormaPagamento(FormaPagamento formaPagamento) {
-        this.formaPagamento = formaPagamento;
+    public void setFormaPagamento(FormadePagamento formaPagamento) {
+        this.FormadePagamento = formaPagamento;
     }
 
     public BigDecimal getValor() {
