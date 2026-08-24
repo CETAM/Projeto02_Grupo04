@@ -3,7 +3,7 @@ package cetam.projeto02grupo04.model;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
-
+import java.util.Date;
 @Entity
 @Table(name = "entrega")
 public class Entrega {

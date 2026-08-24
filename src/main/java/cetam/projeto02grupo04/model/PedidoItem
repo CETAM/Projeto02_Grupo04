@@ -1,4 +1,3 @@
-
 package cetam.projeto02grupo04.model;
 
 import jakarta.persistence.Column;
@@ -12,7 +11,7 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "item_pedido")
+@Table(name = "pedido_item")
 public class PedidoItem {
 
     @Id
