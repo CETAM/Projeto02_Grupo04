@@ -1,5 +1,6 @@
 package cetam.projeto02grupo04.model;
 
+import cetam.projeto02grupo04.model.Entrega;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,13 +12,15 @@ public class Entrega {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_entrega")
-    private Long id;
+    private Integer idEntrega;
 
-    @Column(name = "id_pessoa", nullable = false)
-    private Long idPessoa;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_pessoa", nullable = false)
+    private Pessoa pessoa;
 
-    @Column(name = "id_endereco", nullable = false)
-    private Long idEndereco;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_endereco", nullable = false)
+    private Endereco endereco;
 
     @Column(name = "data_envio")
     private LocalDateTime dataEnvio;
@@ -28,58 +31,38 @@ public class Entrega {
     @Column(name = "data_entrega_realizada")
     private LocalDateTime dataEntregaRealizada;
 
-    @Column(name = "status_entrega")
+    @Column(name = "status_entrega", length = 30)
     private String statusEntrega = "Em Processamento";
 
-    @Column(name = "codigo_rastreio")
+    @Column(name = "codigo_rastreio", length = 50)
     private String codigoRastreio;
 
-    // Construtor vazio
     public Entrega() {
     }
 
-    // Construtor completo
-    public Entrega(Long id, Long idPessoa, Long idEndereco,
-                   LocalDateTime dataEnvio,
-                   LocalDate dataEntregaPrevista,
-                   LocalDateTime dataEntregaRealizada,
-                   String statusEntrega,
-                   String codigoRastreio) {
-
-        this.id = id;
-        this.idPessoa = idPessoa;
-        this.idEndereco = idEndereco;
-        this.dataEnvio = dataEnvio;
-        this.dataEntregaPrevista = dataEntregaPrevista;
-        this.dataEntregaRealizada = dataEntregaRealizada;
-        this.statusEntrega = statusEntrega;
-        this.codigoRastreio = codigoRastreio;
-    }
-
     // Getters e Setters
-
-    public Long getId() {
-        return id;
+    public Integer getIdEntrega() {
+        return idEntrega;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdEntrega(Integer idEntrega) {
+        this.idEntrega = idEntrega;
     }
 
-    public Long getIdPessoa() {
-        return idPessoa;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setIdPessoa(Long idPessoa) {
-        this.idPessoa = idPessoa;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
-    public Long getIdEndereco() {
-        return idEndereco;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setIdEndereco(Long idEndereco) {
-        this.idEndereco = idEndereco;
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     public LocalDateTime getDataEnvio() {
