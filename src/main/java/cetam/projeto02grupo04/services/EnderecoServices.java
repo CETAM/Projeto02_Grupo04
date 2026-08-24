@@ -25,7 +25,6 @@ public class EnderecoServices {
     public List<Endereco> buscarPorPessoa(Long idPessoa) {
         return repository.findByIdPessoa(idPessoa);
     }
-
     public Endereco salvar(Endereco endereco) {
         return repository.save(endereco);
     }
