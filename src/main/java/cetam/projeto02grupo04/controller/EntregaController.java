@@ -1,7 +1,7 @@
 package cetam.projeto02grupo04.controller;
 
 import cetam.projeto02grupo04.model.Entrega;
-import cetam.projeto02grupo04.service.EntregaService;
+import cetam.projeto02grupo04.services.EntregaServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import java.util.List;
 public class EntregaController {
 
     @Autowired
-    private EntregaService entregaService;
+    private EntregaServices entregaService;
 
     // GET /api/entregas -> lista todas as entregas
     @GetMapping
