@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `loja_virtual_roupas` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `loja_virtual_roupas`;
+CREATE DATABASE  IF NOT EXISTS `grupo04_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `grupo04_db`;
 -- MySQL dump 10.13  Distrib 8.0.46, for Win64 (x86_64)
 --
 -- Host: localhost    Database: loja_virtual_roupas
