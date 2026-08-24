@@ -16,7 +16,8 @@ public class PedidoItemController {
     @PostMapping("/salvar")
     public String salvar(@ModelAttribute PedidoItem pedidoItem) {
         services.salvar(pedidoItem);
-        return "redirect:/pedidos/" + PedidoItem.getPedido().getId();
+        // Usando o objeto "pedidoItem" (minúsculo) em vez da classe "PedidoItem":
+        return "redirect:/pedidos/" + pedidoItem.getPedido().getId();
     }
     @PostMapping("/deletar/{id}")
     public String deletar(@PathVariable Long id, @RequestParam Long pedidoId) {
