@@ -1,9 +1,9 @@
 package cetam.projeto02grupo04.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "entrega")
 public class Entrega {
@@ -38,9 +38,16 @@ public class Entrega {
     public Entrega() {
     }
 
-    public Entrega(Long idEntrega, Pessoa pessoa, String idEndereco, Date dataEnvio, Date dataEntregaPrevista, Date dataEntregaRealizada, String statusEntrega, String codigoRastreio) {
-        this.idEntrega = idEntrega;
-        this.pessoa = pessoa;
+    // Construtor completo
+    public Entrega(Long id, Long idPessoa, Long idEndereco,
+                   LocalDateTime dataEnvio,
+                   LocalDate dataEntregaPrevista,
+                   LocalDateTime dataEntregaRealizada,
+                   String statusEntrega,
+                   String codigoRastreio) {
+
+        this.id = id;
+        this.idPessoa = idPessoa;
         this.idEndereco = idEndereco;
         this.dataEnvio = dataEnvio;
         this.dataEntregaPrevista = dataEntregaPrevista;
@@ -50,27 +57,68 @@ public class Entrega {
     }
 
     // Getters e Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
 
-    public Long getIdPessoa() { return idPessoa; }
-    public void setIdPessoa(Long idPessoa) { this.idPessoa = idPessoa; }
+    public Long getId() {
+        return id;
+    }
 
-    public Long getIdEndereco() { return idEndereco; }
-    public void setIdEndereco(Long idEndereco) { this.idEndereco = idEndereco; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public LocalDateTime getDataEnvio() { return dataEnvio; }
-    public void setDataEnvio(LocalDateTime dataEnvio) { this.dataEnvio = dataEnvio; }
+    public Long getIdPessoa() {
+        return idPessoa;
+    }
 
-    public LocalDate getDataEntregaPrevista() { return dataEntregaPrevista; }
-    public void setDataEntregaPrevista(LocalDate dataEntregaPrevista) { this.dataEntregaPrevista = dataEntregaPrevista; }
+    public void setIdPessoa(Long idPessoa) {
+        this.idPessoa = idPessoa;
+    }
 
-    public LocalDateTime getDataEntregaRealizada() { return dataEntregaRealizada; }
-    public void setDataEntregaRealizada(LocalDateTime dataEntregaRealizada) { this.dataEntregaRealizada = dataEntregaRealizada; }
+    public Long getIdEndereco() {
+        return idEndereco;
+    }
 
-    public String getStatusEntrega() { return statusEntrega; }
-    public void setStatusEntrega(String statusEntrega) { this.statusEntrega = statusEntrega; }
+    public void setIdEndereco(Long idEndereco) {
+        this.idEndereco = idEndereco;
+    }
 
-    public String getCodigoRastreio() { return codigoRastreio; }
-    public void setCodigoRastreio(String codigoRastreio) { this.codigoRastreio = codigoRastreio; }
+    public LocalDateTime getDataEnvio() {
+        return dataEnvio;
+    }
+
+    public void setDataEnvio(LocalDateTime dataEnvio) {
+        this.dataEnvio = dataEnvio;
+    }
+
+    public LocalDate getDataEntregaPrevista() {
+        return dataEntregaPrevista;
+    }
+
+    public void setDataEntregaPrevista(LocalDate dataEntregaPrevista) {
+        this.dataEntregaPrevista = dataEntregaPrevista;
+    }
+
+    public LocalDateTime getDataEntregaRealizada() {
+        return dataEntregaRealizada;
+    }
+
+    public void setDataEntregaRealizada(LocalDateTime dataEntregaRealizada) {
+        this.dataEntregaRealizada = dataEntregaRealizada;
+    }
+
+    public String getStatusEntrega() {
+        return statusEntrega;
+    }
+
+    public void setStatusEntrega(String statusEntrega) {
+        this.statusEntrega = statusEntrega;
+    }
+
+    public String getCodigoRastreio() {
+        return codigoRastreio;
+    }
+
+    public void setCodigoRastreio(String codigoRastreio) {
+        this.codigoRastreio = codigoRastreio;
+    }
 }
