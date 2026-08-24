@@ -1,23 +1,17 @@
-import org.springframework.stereotype.Controller;
-import cetam.projeto02grupo04.services.PagamentoService;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-// Import da sua classe Model (ajuste o pacote de acordo com a sua estrutura):
 import cetam.projeto02grupo04.model.FormadePagamento;
+import cetam.projeto02grupo04.services.PagamentoServices;
+import ch.qos.logback.core.model.Model;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/pagamentos")
 public class PagamentoController {
 
-    private final PagamentoService pagamentoService;
+    private final PagamentoServices pagamentoService;
 
-    public PagamentoController(PagamentoService pagamentoService) {
+    public PagamentoController(PagamentoServices pagamentoService) {
         this.pagamentoService = pagamentoService;
     }
 
