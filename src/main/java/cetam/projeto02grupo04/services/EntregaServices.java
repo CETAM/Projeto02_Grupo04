@@ -13,42 +13,33 @@ import java.util.Optional;
 public class EntregaServices {
 
     @Autowired
-    private EntregaRepository entregaRepository;
+    private EntregaRepository repository;
 
-    public List<Entrega> listarTodas() {
-        return entregaRepository.findAll();
-    }
+    // Salva uma entrega
+    public void salvar(Entrega entrega) {
 
-    public Optional<Entrega> buscarPorId(Integer id) {
-        return entregaRepository.findById(id);
-    }
-
-    public Optional<Entrega> buscarPorCodigoRastreio(String codigo) {
-        return entregaRepository.findByCodigoRastreio(codigo);
-    }
-
-    public List<Entrega> buscarPorPessoa(Integer idPessoa) {
-        return entregaRepository.findByPessoaIdPessoa(idPessoa);
-    }
-
-    public Entrega salvar(Entrega entrega) {
-        return entregaRepository.save(entrega);
-    }
-
-    public Entrega atualizarStatus(Integer id, String novoStatus) {
-        Entrega entrega = entregaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Entrega não encontrada com ID: " + id));
-
-        entrega.setStatusEntrega(novoStatus);
-
-        if ("Entregue".equalsIgnoreCase(novoStatus)) {
-            entrega.setDataEntregaRealizada(LocalDateTime.now());
+        // Verifica se a pessoa foi informada
+        if (entrega.getIdPessoa() == null) {
+            throw new IllegalArgumentException(
+                    "A pessoa deve ser informada."
+            );
         }
 
-        return entregaRepository.save(entrega);
-    }
+        // Verifica se o endereço foi informado
+        if (entrega.getIdEndereco() == null) {
+            throw new IllegalArgumentException(
+                    "O endereço deve ser informado."
+            );
+        }
 
-    public void deletar(Integer id) {
-        entregaRepository.deleteById(id);
+        // Define o status padrão
+        if (entrega.getStatusEntrega() == null ||
+                entrega.getStatusEntrega().isBlank()) {
+
+            entrega.setStatusEntrega("Em Processamento");
+        }
+
+        // Salva no banco de dados
+        repository.save(entrega);
     }
 }

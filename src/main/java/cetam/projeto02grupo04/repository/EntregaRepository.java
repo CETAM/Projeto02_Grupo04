@@ -10,9 +10,12 @@ import java.util.Optional;
 @Repository
 public interface EntregaRepository extends JpaRepository<Entrega, Integer> {
 
+    // Busca todas as entregas de uma pessoa
+    List<Entrega> findByPessoa_IdPessoa(Long idPessoa);
+
+    // Busca uma entrega pelo código de rastreio
     Optional<Entrega> findByCodigoRastreio(String codigoRastreio);
 
-    List<Entrega> findByPessoaIdPessoa(Integer idPessoa);
-
+    // Busca entregas por status (ex: "Em Processamento", "Enviado", "Entregue")
     List<Entrega> findByStatusEntrega(String statusEntrega);
 }
