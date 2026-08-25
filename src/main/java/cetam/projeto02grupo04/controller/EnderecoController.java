@@ -39,7 +39,7 @@ public class EnderecoController {
     }
 
     @PostMapping
-    public ResponseEntity<?> criar(@RequestBody Endereco endereco) {
+    public ResponseEntity<?> cadastrar(@RequestBody Endereco endereco) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(enderecoServices.criar(endereco));
         } catch (IllegalArgumentException e) {
@@ -50,6 +50,7 @@ public class EnderecoController {
     @PutMapping("/{id}")
     public ResponseEntity<?> atualizar(@PathVariable Integer id, @RequestBody Endereco endereco) {
         try {
+            endereco.setId(id);
             return ResponseEntity.ok(enderecoServices.atualizar(id, endereco));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

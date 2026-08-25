@@ -33,17 +33,24 @@ public class Endereco {
     @Column(name = "estado", length = 2)
     private String estado;
 
-    // Construtor vazio obrigatorio do JPA
     public Endereco() {
     }
 
-    // Getters e Setters
     public Integer getIdEndereco() {
         return idEndereco;
     }
 
     public void setIdEndereco(Integer idEndereco) {
         this.idEndereco = idEndereco;
+    }
+
+    // Métodos alias para manter compatibilidade com getId() e setId()
+    public Integer getId() {
+        return idEndereco;
+    }
+
+    public void setId(Integer id) {
+        this.idEndereco = id;
     }
 
     public String getCep() {

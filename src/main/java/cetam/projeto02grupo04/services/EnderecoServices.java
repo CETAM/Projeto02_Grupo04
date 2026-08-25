@@ -41,7 +41,7 @@ public class EnderecoServices {
         if (!enderecoRepository.existsById(id)) {
             throw new IllegalArgumentException("Endereço não encontrado para atualização com o ID: " + id);
         }
-        endereco.setIdEndereco(id);
+        endereco.setId(id);
         return enderecoRepository.save(endereco);
     }
 
