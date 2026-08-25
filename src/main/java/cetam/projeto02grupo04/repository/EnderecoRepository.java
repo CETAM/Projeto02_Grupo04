@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
-    List<Endereco> findByIdPessoa(Long idPessoa);
-}
+public interface EnderecoRepository extends JpaRepository<Endereco, Integer> {
 
+    List<Endereco> findByCep(String cep);
+
+    List<Endereco> findByCidade(String cidade);
+}
