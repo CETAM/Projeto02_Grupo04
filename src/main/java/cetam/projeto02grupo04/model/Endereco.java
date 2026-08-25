@@ -14,7 +14,7 @@ public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_endereco")
-    private Long id;
+    private Integer id;
 
     private String cep;
     private String rua;
@@ -30,7 +30,7 @@ public class Endereco {
 
     // 2. Getters e Setters (para pegar e alterar os valores)
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
