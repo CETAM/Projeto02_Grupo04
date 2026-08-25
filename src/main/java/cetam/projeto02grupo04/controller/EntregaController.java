@@ -1,7 +1,7 @@
 package cetam.projeto02grupo04.controller;
 
 import cetam.projeto02grupo04.model.Entrega;
-import cetam.projeto02grupo04.services.EntregaServices;
+import cetam.projeto02grupo04.services.EntregaServices; // <-- FALTAVA ESTE IMPORT
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,58 +29,59 @@ public class EntregaController {
     }
 
     @GetMapping("/rastreio/{codigo}")
-    public ResponseEntity<Entrega> buscarPorCodigoRastreio(@PathVariable String codigo) {
+    public ResponseEntity<Entrega> buscarPorRastreio(@PathVariable String codigo) {
         return entregaServices.buscarPorCodigoRastreio(codigo)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/pessoa/{idPessoa}")
-    public ResponseEntity<List<Entrega>> buscarPorPessoa(@PathVariable Integer idPessoa) {
-        return ResponseEntity.ok(entregaServices.buscarPorPessoa(Long.valueOf(idPessoa)));
+    public List<Entrega> buscarPorPessoa(@PathVariable Long idPessoa) {
+        return entregaServices.buscarPorPessoa(idPessoa);
     }
 
+    // GET /api/entregas/status/{status} -> lista entregas por status
     @GetMapping("/status/{status}")
-    public ResponseEntity<List<Entrega>> buscarPorStatus(@PathVariable String status) {
-        return ResponseEntity.ok(entregaServices.buscarPorStatus(status));
+    public List<Entrega> buscarPorStatus(@PathVariable String status) {
+        return entregaServices.buscarPorStatus(status);
     }
 
     @PostMapping
     public ResponseEntity<Entrega> criar(@RequestBody Entrega entrega) {
-        Entrega novaEntrega = entregaServices.criar(entrega);
-        return ResponseEntity.status(HttpStatus.CREATED).body(novaEntrega);
+        Entrega salva = entregaServices.criar(entrega);
+        return ResponseEntity.status(HttpStatus.CREATED).body(salva);
     }
 
+    // PUT /api/entregas/{id} -> atualiza uma entrega existente
     @PutMapping("/{id}")
-    public ResponseEntity<Entrega> atualizar(@PathVariable Integer id, @RequestBody Entrega entrega) {
-        try {
-            return ResponseEntity.ok(entregaServices.atualizar(Long.valueOf(id), entrega));
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<Entrega> atualizar(@PathVariable Long id, @RequestBody Entrega dadosAtualizados) {
+        return entregaServices.atualizar(id, dadosAtualizados)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    @PatchMapping("/{id}/envio")
-    public ResponseEntity<Entrega> registrarEnvio(@PathVariable Integer id) {
-        try {
-            return ResponseEntity.ok(entregaServices.registrarEnvio(Long.valueOf(id)));
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+    // PATCH /api/entregas/{id}/enviar?codigoRastreio=XYZ -> registra o envio da entrega
+    @PatchMapping("/{id}/enviar")
+    public ResponseEntity<Entrega> registrarEnvio(@PathVariable Long id, @RequestParam String codigoRastreio) {
+        return entregaServices.registrarEnvio(id, codigoRastreio)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    @PatchMapping("/{id}/entregue")
-    public ResponseEntity<Entrega> registrarEntregaRealizada(@PathVariable Integer id) {
-        try {
-            return ResponseEntity.ok(entregaServices.registrarEntregaRealizada(id));
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+    // PATCH /api/entregas/{id}/entregar -> registra a entrega como realizada
+    @PatchMapping("/{id}/entregar")
+    public ResponseEntity<Entrega> registrarEntregaRealizada(@PathVariable Long id) {
+        return entregaServices.registrarEntregaRealizada(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
+    // DELETE /api/entregas/{id} -> remove uma entrega
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
-        entregaServices.deletar(Long.valueOf(id));
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        if (!entregaServices.deletar(id)) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.noContent().build();
     }
 }
