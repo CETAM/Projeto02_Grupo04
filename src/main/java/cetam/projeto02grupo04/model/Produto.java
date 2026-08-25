@@ -5,43 +5,47 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "templates")
+@Table(name = "produto")
+@SuppressWarnings("all")
 public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id_produto")
+    private Integer idProduto;
 
-    @Column(nullable = false, length = 150)
+    @Column(name = "nome", nullable = false, length = 100)
     private String nome;
 
-    @Column(nullable = false, precision = 10, scale = 2)
+    @Column(name = "descricao", length = 255)
+    private String descricao;
+
+    @Column(name = "preco", nullable = false, precision = 10, scale = 2)
     private BigDecimal preco;
 
     @Column(name = "quantidade_estoque", nullable = false)
     private Integer quantidadeEstoque;
 
-    @ManyToOne
-    @JoinColumn(name = "categoria_id")
-    private Categoria categoria;
+    @Column(name = "id_categoria")
+    private Integer idCategoria;
 
     public Produto() {
     }
 
-    public Produto(Long id, String nome, BigDecimal preco, Integer quantidadeEstoque, Categoria categoria) {
-        this.id = id;
-        this.nome = nome;
-        this.preco = preco;
-        this.quantidadeEstoque = quantidadeEstoque;
-        this.categoria = categoria;
+    public Integer getIdProduto() {
+        return idProduto;
     }
 
-    public Long getId() {
-        return id;
+    public void setIdProduto(Integer idProduto) {
+        this.idProduto = idProduto;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Integer getId() {
+        return idProduto;
+    }
+
+    public void setId(Integer id) {
+        this.idProduto = id;
     }
 
     public String getNome() {
@@ -50,6 +54,14 @@ public class Produto {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public BigDecimal getPreco() {
@@ -68,11 +80,11 @@ public class Produto {
         this.quantidadeEstoque = quantidadeEstoque;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public Integer getIdCategoria() {
+        return idCategoria;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setIdCategoria(Integer idCategoria) {
+        this.idCategoria = idCategoria;
     }
 }
