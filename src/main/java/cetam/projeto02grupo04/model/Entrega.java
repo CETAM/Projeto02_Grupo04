@@ -104,4 +104,8 @@ public class Entrega {
     public void setCodigoRastreio(String codigoRastreio) {
         this.codigoRastreio = codigoRastreio;
     }
+
+    public boolean getIdEndereco() {
+        return false;
+    }
 }
