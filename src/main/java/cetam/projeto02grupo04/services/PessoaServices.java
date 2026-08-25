@@ -1,111 +1,34 @@
 package cetam.projeto02grupo04.services;
 
+import cetam.projeto02grupo04.model.Pessoa;
+import cetam.projeto02grupo04.repository.PessoaRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
 public class PessoaServices {
-    @Service
-    public static class PessoaService {
 
-        private final PessoaRepository pessoaRepository;
+    private final PessoaRepository repository;
 
-        public PessoaService(PessoaRepository pessoaRepository) {
-            this.pessoaRepository = pessoaRepository;
-        }
+    public PessoaServices(PessoaRepository repository) {
+        this.repository = repository;
+    }
 
-        // Listar todas as pessoas
-        public List<Pessoa> listarTodas() {
-            return pessoaRepository.findAll();
-        }
+    public List<Pessoa> listar() {
+        return repository.findAll();
+    }
 
-        // Listar pessoas por tipo
-        public List<Pessoa> listarPorTipo(String tipo) {
-            return pessoaRepository.findByTipoIgnoreCase(tipo);
-        }
+    public Pessoa buscarPorId(Integer id) {
+        return repository.findById(id).orElse(null);
+    }
 
-        // Buscar pessoa por ID
-        public Optional<Pessoa> buscarPorId(Long id) {
-            return pessoaRepository.findById(id);
-        }
+    public Pessoa salvar(Pessoa pessoa) {
+        return repository.save(pessoa);
+    }
 
-        // Cadastrar pessoa
-        public Pessoa cadastrar(Pessoa pessoa) {
-
-            pessoa.setId(null);
-
-            if (!tipoValido(pessoa.getTipo())) {
-                throw new IllegalArgumentException(
-                        "Tipo de pessoa inválido. Use: Cliente, Fornecedor ou Funcionario."
-                );
-            }
-
-            pessoa.setTipo(tipoNormalizado(pessoa.getTipo()));
-
-            return pessoaRepository.save(pessoa);
-        }
-
-        // Atualizar pessoa
-        public Optional<Pessoa> atualizar(Long id, Pessoa dados) {
-
-            if (!tipoValido(dados.getTipo())) {
-                throw new IllegalArgumentException(
-                        "Tipo de pessoa inválido. Use: Cliente, Fornecedor ou Funcionario."
-                );
-            }
-
-            return pessoaRepository.findById(id)
-                    .map(pessoa -> {
-
-                        pessoa.setTipo(tipoNormalizado(dados.getTipo()));
-                        pessoa.setNome(dados.getNome());
-                        pessoa.setEmail(dados.getEmail());
-                        pessoa.setSenha(dados.getSenha());
-                        pessoa.setCpfCnpj(dados.getCpfCnpj());
-                        pessoa.setTelefone(dados.getTelefone());
-
-                        return pessoaRepository.save(pessoa);
-                    });
-        }
-
-        // Excluir pessoa
-        public boolean excluir(Long id) {
-
-            if (!pessoaRepository.existsById(id)) {
-                return false;
-            }
-
-            pessoaRepository.deleteById(id);
-            return true;
-        }
-
-        // Validar tipo de pessoa
-        private boolean tipoValido(String tipo) {
-
-            if (tipo == null) {
-                return false;
-            }
-
-            return tipo.equalsIgnoreCase("Cliente")
-                    || tipo.equalsIgnoreCase("Fornecedor")
-                    || tipo.equalsIgnoreCase("Funcionario")
-                    || tipo.equalsIgnoreCase("Funcionário");
-        }
-
-        // Padronizar o tipo
-        private String tipoNormalizado(String tipo) {
-
-            if (tipo.equalsIgnoreCase("Cliente")) {
-                return "Cliente";
-            }
-
-            if (tipo.equalsIgnoreCase("Fornecedor")) {
-                return "Fornecedor";
-            }
-
-            if (tipo.equalsIgnoreCase("Funcionario")
-                    || tipo.equalsIgnoreCase("Funcionário")) {
-                return "Funcionario";
-            }
-
-            return tipo;
-        }
+    public void deletar(Integer id) {
+        repository.deleteById(id);
     }
 }
 
