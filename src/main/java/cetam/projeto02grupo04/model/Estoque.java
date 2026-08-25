@@ -9,29 +9,34 @@ public class Estoque {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_estoque")
-    private Integer id;
-    @Column(name="")
-    private Integer quantidadeAtual;
-    private Integer quantidadeMinima;
-    private String localizacao; // Ex: Prateleira A, Depósito 2
+    private Integer idEstoque;
 
-    public Estoque() {}
+    @ManyToOne
+    @JoinColumn(name = "id_produto", nullable = false)
+    private Produto produto;
 
-    public Estoque(Integer quantidadeAtual, Integer quantidadeMinima, String localizacao) {
-        this.quantidadeAtual = quantidadeAtual;
-        this.quantidadeMinima = quantidadeMinima;
-        this.localizacao = localizacao;
-    }
+    @Column(name = "quant_entrada")
+    private Double quantEntrada;
 
-    public Integer getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    @Column(name = "quant_saida")
+    private Double quantSaida;
 
-    public Integer getQuantidadeAtual() { return quantidadeAtual; }
-    public void setQuantidadeAtual(Integer quantidadeAtual) { this.quantidadeAtual = quantidadeAtual; }
+    @Column(name = "quant_minima")
+    private Double quantMinima;
 
-    public Integer getQuantidadeMinima() { return quantidadeMinima; }
-    public void setQuantidadeMinima(Integer quantidadeMinima) { this.quantidadeMinima = quantidadeMinima; }
+    // Getters e Setters
+    public Integer getIdEstoque() { return idEstoque; }
+    public void setIdEstoque(Integer idEstoque) { this.idEstoque = idEstoque; }
 
-    public String getLocalizacao() { return localizacao; }
-    public void setLocalizacao(String localizacao) { this.localizacao = localizacao; }
-}
+    public Produto getProduto() { return produto; }
+    public void setProduto(Produto produto) { this.produto = produto; }
+
+    public Double getQuantEntrada() { return quantEntrada; }
+    public void setQuantEntrada(Double quantEntrada) { this.quantEntrada = quantEntrada; }
+
+    public Double getQuantSaida() { return quantSaida; }
+    public void setQuantSaida(Double quantSaida) { this.quantSaida = quantSaida; }
+
+    public Double getQuantMinima() { return quantMinima; }
+    public void setQuantMinima(Double quantMinima) { this.quantMinima = quantMinima; }
+} 
