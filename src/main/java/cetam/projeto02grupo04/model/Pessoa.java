@@ -9,11 +9,11 @@ public class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "id_pessoa")
+    private Integer idPessoa;
 
-    @Column(name = "tipo_usuario", nullable = false)
-    private String tipo;
+    @Column(name = "tipo_pessoa", nullable = false)
+    private String tipoPessoa;
 
     @Column(name = "nome", nullable = false)
     private String nome;
@@ -24,7 +24,7 @@ public class Pessoa {
     @Column(name = "senha", nullable = false)
     private String senha;
 
-    @Column(name = "documento", nullable = false)
+    @Column(name = "cpf_cnpj")
     private String cpfCnpj;
 
     @Column(name = "telefone")
@@ -36,17 +36,6 @@ public class Pessoa {
     public Pessoa() {
     }
 
-    public Pessoa(String tipo, String nome, String email, String senha,
-                  String cpfCnpj, String telefone) {
-        this.tipo = tipo;
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.cpfCnpj = cpfCnpj;
-        this.telefone = telefone;
-        this.dataCadastro = LocalDateTime.now();
-    }
-
     @PrePersist
     public void antesDeSalvar() {
         if (this.dataCadastro == null) {
@@ -54,20 +43,21 @@ public class Pessoa {
         }
     }
 
-    public Long getId() {
-        return id;
+    // Getters e Setters
+    public Integer getIdPessoa() {
+        return idPessoa;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdPessoa(Integer idPessoa) {
+        this.idPessoa = idPessoa;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getTipoPessoa() {
+        return tipoPessoa;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setTipoPessoa(String tipoPessoa) {
+        this.tipoPessoa = tipoPessoa;
     }
 
     public String getNome() {
