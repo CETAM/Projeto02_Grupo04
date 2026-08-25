@@ -1,16 +1,16 @@
 package cetam.projeto02grupo04.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "estoque")
 public class Estoque {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id_estoque")
+    private Integer id;
+    @Column(name="")
     private Integer quantidadeAtual;
     private Integer quantidadeMinima;
     private String localizacao; // Ex: Prateleira A, Depósito 2
@@ -23,7 +23,7 @@ public class Estoque {
         this.localizacao = localizacao;
     }
 
-    public Long getId() { return id; }
+    public Integer getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
     public Integer getQuantidadeAtual() { return quantidadeAtual; }

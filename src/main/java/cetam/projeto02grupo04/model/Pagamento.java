@@ -11,16 +11,14 @@ public class Pagamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_pagamento")
-    private Long id;
+    private Integer idPagamento;
 
-    // Relacionamento 1 para 1 com Pedido
-    @OneToOne
-    @JoinColumn(name = "id_pedido", nullable = false, unique = true)
-    private Pedido pedido;
+    @Column(name = "id_pedido", nullable = false, unique = true)
+    private Integer idPedido;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "forma_pagamento", nullable = false)
-    private FormadePagamento FormadePagamento;
+    private FormadePagamento formaPagamento;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status_pagamento")
@@ -32,38 +30,31 @@ public class Pagamento {
     @Column(name = "valor_pago", nullable = false, precision = 10, scale = 2)
     private BigDecimal valorPago;
 
-    // Construtores
-    public Pagamento() {}
-
-    public Pagamento(Pedido pedido, FormadePagamento formaPagamento, BigDecimal valorPago) {
-        this.pedido = pedido;
-        this.FormadePagamento = formaPagamento;
-        this.valorPago = valorPago;
+    public Pagamento() {
     }
 
-    // Getters e Setters
-    public Long getId() {
-        return id;
+    public Integer getIdPagamento() {
+        return idPagamento;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdPagamento(Integer idPagamento) {
+        this.idPagamento = idPagamento;
     }
 
-    public Pedido getPedido() {
-        return pedido;
+    public Integer getIdPedido() {
+        return idPedido;
     }
 
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
+    public void setIdPedido(Integer idPedido) {
+        this.idPedido = idPedido;
     }
 
     public FormadePagamento getFormaPagamento() {
-        return FormadePagamento;
+        return formaPagamento;
     }
 
     public void setFormaPagamento(FormadePagamento formaPagamento) {
-        this.FormadePagamento = formaPagamento;
+        this.formaPagamento = formaPagamento;
     }
 
     public StatusPagamento getStatusPagamento() {

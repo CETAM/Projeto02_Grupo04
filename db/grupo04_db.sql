@@ -44,6 +44,19 @@ INSERT INTO `carrinho` VALUES (1,1,'2026-08-14 15:25:09');
 /*!40000 ALTER TABLE `carrinho` ENABLE KEYS */;
 UNLOCK TABLES;
 
+CREATE TABLE estoque (
+  id_estoque int NOT NULL AUTO_INCREMENT,
+  id_produto int not null,
+  quant_entrada double,
+  quant_saida double,
+  quant_minima double,
+  
+  PRIMARY KEY (id_estoque),
+  CONSTRAINT fk_id_produto
+        FOREIGN KEY (id_produto)
+        REFERENCES produto(id_produto)
+)
+
 --
 -- Table structure for table `categoria`
 --
