@@ -31,9 +31,7 @@ public class EntregaServices {
     }
 
     public List<Entrega> buscarPorPessoa(Integer idPessoa) {
-        return repository.findAll().stream()
-                .filter(e -> e.getPessoa() != null && idPessoa.equals(e.getPessoa().getId()))
-                .toList();
+        return repository.findByPessoaIdPessoa(idPessoa);
     }
 
     public List<Entrega> buscarPorStatus(String status) {
