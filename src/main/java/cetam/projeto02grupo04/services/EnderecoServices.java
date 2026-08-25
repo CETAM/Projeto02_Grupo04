@@ -12,28 +12,43 @@ import java.util.Optional;
 public class EnderecoServices {
 
     @Autowired
-    private EnderecoRepository repository;
+    private EnderecoRepository enderecoRepository;
 
     public List<Endereco> listarTodos() {
-        return repository.findAll();
+        return enderecoRepository.findAll();
     }
 
-    public Optional<Endereco> buscarPorId(Long id) {
-        return repository.findById(id);
+    public Optional<Endereco> buscarPorId(Integer id) {
+        return enderecoRepository.findById(id);
     }
 
-    public List<Endereco> buscarPorPessoa(Long idPessoa) {
-        return repository.findByIdPessoa(idPessoa);
-    }
-    public Endereco salvar(Endereco endereco) {
-        return repository.save(endereco);
+    public List<Endereco> buscarPorCep(String cep) {
+        return enderecoRepository.findByCep(cep);
     }
 
-    public void deletar(Long id) {
-        repository.deleteById(id);
+    public List<Endereco> buscarPorCidade(String cidade) {
+        return enderecoRepository.findByCidade(cidade);
     }
 
-    public boolean existePorId(Long id) {
-        return repository.existsById(id);
+    public Endereco criar(Endereco endereco) {
+        if (endereco.getCep() == null || endereco.getCep().trim().isEmpty()) {
+            throw new IllegalArgumentException("O CEP é obrigatório.");
+        }
+        return enderecoRepository.save(endereco);
+    }
+
+    public Endereco atualizar(Integer id, Endereco endereco) {
+        if (!enderecoRepository.existsById(id)) {
+            throw new IllegalArgumentException("Endereço não encontrado para atualização com o ID: " + id);
+        }
+        endereco.setIdEndereco(id);
+        return enderecoRepository.save(endereco);
+    }
+
+    public void deletar(Integer id) {
+        if (!enderecoRepository.existsById(id)) {
+            throw new IllegalArgumentException("Endereço não encontrado com o ID: " + id);
+        }
+        enderecoRepository.deleteById(id);
     }
 }

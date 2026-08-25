@@ -3,6 +3,7 @@ package cetam.projeto02grupo04.controller;
 import cetam.projeto02grupo04.model.Endereco;
 import cetam.projeto02grupo04.services.EnderecoServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,41 +14,57 @@ import java.util.List;
 public class EnderecoController {
 
     @Autowired
-    private EnderecoServices service;
+    private EnderecoServices enderecoServices;
 
     @GetMapping
-    public List<Endereco> listarTodos() {
-        return service.listarTodos();
+    public ResponseEntity<List<Endereco>> listarTodos() {
+        return ResponseEntity.ok(enderecoServices.listarTodos());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Endereco> buscarPorId(@PathVariable Long id) {
-        return service.buscarPorId(id)
+    public ResponseEntity<?> buscarPorId(@PathVariable Integer id) {
+        return enderecoServices.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/cep/{cep}")
+    public ResponseEntity<List<Endereco>> buscarPorCep(@PathVariable String cep) {
+        return ResponseEntity.ok(enderecoServices.buscarPorCep(cep));
+    }
+
+    @GetMapping("/cidade/{cidade}")
+    public ResponseEntity<List<Endereco>> buscarPorCidade(@PathVariable String cidade) {
+        return ResponseEntity.ok(enderecoServices.buscarPorCidade(cidade));
+    }
+
     @PostMapping
-    public Endereco cadastrar(@RequestBody Endereco endereco) {
-        return service.salvar(endereco);
+    public ResponseEntity<?> criar(@RequestBody Endereco endereco) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(enderecoServices.criar(endereco));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Endereco> atualizar(@PathVariable Long id, @RequestBody Endereco enderecoDetalhes) {
-        if (!service.existePorId(id)) {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<?> atualizar(@PathVariable Integer id, @RequestBody Endereco endereco) {
+        try {
+            return ResponseEntity.ok(enderecoServices.atualizar(id, endereco));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-        enderecoDetalhes.setId(id);
-        Endereco atualizado = service.salvar(enderecoDetalhes);
-        return ResponseEntity.ok(atualizado);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        if (!service.existePorId(id)) {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<?> deletar(@PathVariable Integer id) {
+        try {
+            enderecoServices.deletar(id);
+            return ResponseEntity.noContent().build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-        service.deletar(id);
-        return ResponseEntity.noContent().build();
     }
 }

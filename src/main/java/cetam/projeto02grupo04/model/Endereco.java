@@ -1,37 +1,49 @@
 package cetam.projeto02grupo04.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "endereco")
+@SuppressWarnings("unused")
 public class Endereco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_endereco")
-    private Integer id;
+    private Integer idEndereco;
 
+    @Column(name = "cep", length = 9)
     private String cep;
+
+    @Column(name = "rua", length = 100)
     private String rua;
+
+    @Column(name = "numero", length = 10)
     private String numero;
+
+    @Column(name = "complemento", length = 50)
     private String complemento;
+
+    @Column(name = "bairro", length = 50)
     private String bairro;
+
+    @Column(name = "cidade", length = 50)
     private String cidade;
+
+    @Column(name = "estado", length = 2)
     private String estado;
 
-    // 1. Construtor vazio (obrigatório para o Spring / JPA funcionar)
+    // Construtor vazio obrigatorio do JPA
     public Endereco() {
     }
 
-    // 2. Getters e Setters (para pegar e alterar os valores)
+    // Getters e Setters
+    public Integer getIdEndereco() {
+        return idEndereco;
+    }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdEndereco(Integer idEndereco) {
+        this.idEndereco = idEndereco;
     }
 
     public String getCep() {
@@ -90,19 +102,3 @@ public class Endereco {
         this.estado = estado;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
