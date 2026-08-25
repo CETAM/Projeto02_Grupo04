@@ -16,21 +16,18 @@ public class EntregaController {
     @Autowired
     private EntregaServices entregaServices;
 
-    // GET /api/entregas -> lista todas as entregas
     @GetMapping
-    public List<Entrega> listarTodas() {
-        return entregaServices.listarTodas();
+    public ResponseEntity<List<Entrega>> listarTodas() {
+        return ResponseEntity.ok(entregaServices.listarTodas());
     }
 
-    // GET /api/entregas/{id} -> busca uma entrega pelo id
     @GetMapping("/{id}")
-    public ResponseEntity<Entrega> buscarPorId(@PathVariable Long id) {
-        return entregaServices.buscarPorId(id)
+    public ResponseEntity<Entrega> buscarPorId(@PathVariable Integer id) {
+        return entregaServices.buscarPorId(Long.valueOf(id))
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // GET /api/entregas/rastreio/{codigo} -> busca uma entrega pelo código de rastreio
     @GetMapping("/rastreio/{codigo}")
     public ResponseEntity<Entrega> buscarPorCodigoRastreio(@PathVariable String codigo) {
         return entregaServices.buscarPorCodigoRastreio(codigo)
@@ -38,55 +35,52 @@ public class EntregaController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // GET /api/entregas/pessoa/{idPessoa} -> lista entregas de uma pessoa
     @GetMapping("/pessoa/{idPessoa}")
-    public List<Entrega> buscarPorPessoa(@PathVariable Long idPessoa) {
-        return entregaServices.buscarPorPessoa(idPessoa);
+    public ResponseEntity<List<Entrega>> buscarPorPessoa(@PathVariable Integer idPessoa) {
+        return ResponseEntity.ok(entregaServices.buscarPorPessoa(Long.valueOf(idPessoa)));
     }
 
-    // GET /api/entregas/status/{status} -> lista entregas por status
     @GetMapping("/status/{status}")
-    public List<Entrega> buscarPorStatus(@PathVariable String status) {
-        return entregaServices.buscarPorStatus(status);
+    public ResponseEntity<List<Entrega>> buscarPorStatus(@PathVariable String status) {
+        return ResponseEntity.ok(entregaServices.buscarPorStatus(status));
     }
 
-    // POST /api/entregas -> cria uma nova entrega
     @PostMapping
     public ResponseEntity<Entrega> criar(@RequestBody Entrega entrega) {
-        Entrega salva = entregaServices.criar(entrega);
-        return ResponseEntity.status(HttpStatus.CREATED).body(salva);
+        Entrega novaEntrega = entregaServices.criar(entrega);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novaEntrega);
     }
 
-    // PUT /api/entregas/{id} -> atualiza uma entrega existente
     @PutMapping("/{id}")
-    public ResponseEntity<Entrega> atualizar(@PathVariable Long id, @RequestBody Entrega dadosAtualizados) {
-        return entregaServices.atualizar(id, dadosAtualizados)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-
-    // PATCH /api/entregas/{id}/enviar?codigoRastreio=XYZ -> registra o envio da entrega
-    @PatchMapping("/{id}/enviar")
-    public ResponseEntity<Entrega> registrarEnvio(@PathVariable Long id, @RequestParam String codigoRastreio) {
-        return entregaServices.registrarEnvio(id, codigoRastreio)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-
-    // PATCH /api/entregas/{id}/entregar -> registra a entrega como realizada
-    @PatchMapping("/{id}/entregar")
-    public ResponseEntity<Entrega> registrarEntregaRealizada(@PathVariable Long id) {
-        return entregaServices.registrarEntregaRealizada(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-
-    // DELETE /api/entregas/{id} -> remove uma entrega
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        if (!entregaServices.deletar(id)) {
+    public ResponseEntity<Entrega> atualizar(@PathVariable Integer id, @RequestBody Entrega entrega) {
+        try {
+            return ResponseEntity.ok(entregaServices.atualizar(Long.valueOf(id), entrega));
+        } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PatchMapping("/{id}/envio")
+    public ResponseEntity<Entrega> registrarEnvio(@PathVariable Integer id) {
+        try {
+            return ResponseEntity.ok(entregaServices.registrarEnvio(Long.valueOf(id)));
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PatchMapping("/{id}/entregue")
+    public ResponseEntity<Entrega> registrarEntregaRealizada(@PathVariable Integer id) {
+        try {
+            return ResponseEntity.ok(entregaServices.registrarEntregaRealizada(id));
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
+        entregaServices.deletar(Long.valueOf(id));
         return ResponseEntity.noContent().build();
     }
 }
