@@ -9,39 +9,48 @@ public class ItemCarrinho {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_item_carrinho")
-    private Long idItemCarrinho;
+    private Integer idItemCarrinho;
 
     @Column(name = "id_carrinho", nullable = false)
-    private Long idCarrinho;
+    private Integer idCarrinho;
 
     @Column(name = "id_produto", nullable = false)
-    private Long idProduto;
+    private Integer idProduto;
 
-    @Column(nullable = false)
+    @Column(name = "quantidade", nullable = false)
     private Integer quantidade;
 
-    // Getters e Setters
-    public Long getIdItemCarrinho() {
+    public ItemCarrinho() {
+    }
+
+    public ItemCarrinho(Integer idItemCarrinho, Integer idCarrinho, Integer idProduto, Integer quantidade) {
+        this.idItemCarrinho = idItemCarrinho;
+        this.idCarrinho = idCarrinho;
+        this.idProduto = idProduto;
+        this.quantidade = quantidade;
+    }
+
+    public Integer getIdItemCarrinho() {
         return idItemCarrinho;
     }
 
-    public void setIdItemCarrinho(Long idItemCarrinho) {
+    public void setIdItemCarrinho(Integer idItemCarrinho) {
         this.idItemCarrinho = idItemCarrinho;
     }
 
-    public Long getIdCarrinho() {
+    public Integer getIdCarrinho() {
         return idCarrinho;
     }
 
-    public void setIdCarrinho(Long idCarrinho) {
+    public void setIdCarrinho(Integer idCarrinho) {
         this.idCarrinho = idCarrinho;
     }
 
-    public Long getIdProduto() {
+    public Integer getIdProduto() {
         return idProduto;
     }
 
-    public void setIdProduto(Long idProduto) {
+    public void setIdProduto(Integer idProduto) {
         this.idProduto = idProduto;
     }
 
