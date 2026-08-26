@@ -17,7 +17,7 @@ public class PedidoItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_item_pedido")
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "id_pedido", nullable = false)
@@ -36,7 +36,7 @@ public class PedidoItem {
     public PedidoItem() {
     }
 
-    public PedidoItem(Long id, Pedido pedido, Produto produto, Integer quantidade, BigDecimal precoUnitario) {
+    public PedidoItem(Integer id, Pedido pedido, Produto produto, Integer quantidade, BigDecimal precoUnitario) {
         this.id = id;
         this.pedido = pedido;
         this.produto = produto;
@@ -44,11 +44,11 @@ public class PedidoItem {
         this.precoUnitario = precoUnitario;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

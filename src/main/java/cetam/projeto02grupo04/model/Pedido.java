@@ -11,7 +11,7 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_pedido")
-    private Long idPedido;
+    private Integer idPedido;
 
     @ManyToOne
     @JoinColumn(name = "id_pessoa", nullable = false)
@@ -36,7 +36,7 @@ public class Pedido {
     }
 
     // Construtor completo
-    public Pedido(Long idPedido, Pessoa pessoa, Endereco endereco, LocalDateTime dataPedido, StatusPedido statusPedido, BigDecimal valorTotal) {
+    public Pedido(Integer idPedido, Pessoa pessoa, Endereco endereco, LocalDateTime dataPedido, StatusPedido statusPedido, BigDecimal valorTotal) {
         this.idPedido = idPedido;
         this.pessoa = pessoa;
         this.endereco = endereco;
@@ -46,20 +46,20 @@ public class Pedido {
     }
 
     // Getters e Setters
-    public Long getIdPedido() {
+    public Integer getIdPedido() {
         return idPedido;
     }
 
-    public void setIdPedido(Long idPedido) {
+    public void setIdPedido(Integer idPedido) {
         this.idPedido = idPedido;
     }
 
     // Alias para compatibilidade com partes do código que chamam getId()
-    public Long getId() {
+    public Integer getId() {
         return idPedido;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.idPedido = id;
     }
 
