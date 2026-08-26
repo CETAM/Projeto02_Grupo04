@@ -15,8 +15,8 @@ public class PessoaServices {
         this.repository = repository;
     }
 
-    public List<Pessoa> listar() {
-        return repository.findAll();
+    public List<Pessoa> buscarPorTipo(String tipoPessoa) {
+        return repository.findByTipoPessoaIgnoreCase(tipoPessoa);
     }
 
     public Pessoa buscarPorId(Integer id) {
@@ -33,5 +33,5 @@ public class PessoaServices {
 }
 
 
-    
+
 

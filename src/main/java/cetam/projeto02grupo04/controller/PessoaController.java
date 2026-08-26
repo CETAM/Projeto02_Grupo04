@@ -16,11 +16,10 @@ public class PessoaController {
         this.services = services;
     }
 
-    @GetMapping
-    public List<Pessoa> listar() {
-        return services.listar();
+    @GetMapping("/tipo/{tipoPessoa}")
+    public List<Pessoa> buscarPorTipo(@PathVariable String tipoPessoa) {
+        return services.buscarPorTipo(tipoPessoa);
     }
-
     @GetMapping("/{id}")
     public Pessoa buscarPorId(@PathVariable Integer id) {
         return services.buscarPorId(id);
