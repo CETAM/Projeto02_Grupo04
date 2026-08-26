@@ -17,19 +17,10 @@ public class ItemCarrinho {
     @Column(name = "id_produto", nullable = false)
     private Integer idProduto;
 
-    @Column(name = "quantidade", nullable = false)
+    @Column(nullable = false)
     private Integer quantidade;
 
-    public ItemCarrinho() {
-    }
-
-    public ItemCarrinho(Integer idItemCarrinho, Integer idCarrinho, Integer idProduto, Integer quantidade) {
-        this.idItemCarrinho = idItemCarrinho;
-        this.idCarrinho = idCarrinho;
-        this.idProduto = idProduto;
-        this.quantidade = quantidade;
-    }
-
+    // Getters e Setters
     public Integer getIdItemCarrinho() {
         return idItemCarrinho;
     }
