@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     // Abre o index.html quando acessar http://localhost:8080/ ou http://localhost:8080/index
-    @GetMapping({"/", "/index"})
-    public String index() {
-        return "index";
+    @GetMapping({"/", "/dashboard"})
+    public String dashboard() {
+        return "dashboard";
     }
 
     // Abre o dashboard.html quando acessar http://localhost:8080/dashboard
