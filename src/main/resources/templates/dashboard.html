@@ -13,7 +13,7 @@
     <!-- Remixicon -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <!-- CSS estático do Spring -->
-    <link rel="stylesheet" href="/css/estilos.css">
+
     <link rel="stylesheet" th:href="@{/custom.css}">
 </head>
 <body>
@@ -21,35 +21,55 @@
 <!-- CABEÇALHO -->
 <header class="header">
     <div class="header-container">
-        <div class="logo-box">
 
-            <img th:src="@{/img/logo.png}" alt="Linda Moda" class="logo-img">
-        </div>
+        <!-- 1. Logo na Esquerda -->
+        <a href="index.html" class="logo-box">
+            <img th:src="@{/img/logo.png}" src="logo.png" alt="Linda Moda Logo" class="logo-img">
+        </a>
 
+        <!-- 2. Menu Centralizado -->
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Novas Coleções</a></li>
+                <li><a href="#">Vestidos</a></li>
+                <li><a href="#">Saias</a></li>
+                <li><a href="#">Blusas</a></li>
+                <li><a href="#">Sobre Nós</a></li>
+                <li><a th:href="@{/dashboard}" href="dashboard.html">Dashboard</a></li>
+            </ul>
+        </nav>
 
-            <img th:src="@{/img/logo.png}" alt="Linda Moda" class="logo-img" >
-        </div>
-
-
-        <ul class="nav-menu">
-            <li><a th:href="@{/produtos}">Novas Coleções</a></li>
-            <li><a th:href="@{/produtos}">Vestidos</a></li>
-            <li><a th:href="@{/produtos}">Saias</a></li>
-            <li><a th:href="@{/produtos}">Blusas</a></li>
-            <li><a href="#">Sobre Nós</a></li>
-        </ul>
-
+        <!-- 3. Ícones Elegantes (SVG Inline) -->
         <div class="header-icons">
-            <span class="icon-btn"><i class="ri-search-line"></i></span>
-            <span class="icon-btn"><i class="ri-user-line"></i></span>
-            <span class="icon-btn">
-                <i class="ri-shopping-bag-line"></i>
+            <!-- Busca -->
+            <a href="#" class="icon-btn" title="Buscar">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </a>
+
+            <!-- Usuário -->
+            <a href="#" class="icon-btn" title="Minha Conta">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </a>
+
+            <!-- Sacola de Compras -->
+            <a href="#" class="icon-btn cart-btn" title="Carrinho">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
                 <span class="cart-badge">1</span>
-            </span>
+            </a>
         </div>
+
     </div>
 </header>
-
 <!-- CONTEÚDO PRINCIPAL DO PRODUTO -->
 <main class="main-container">
 
