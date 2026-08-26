@@ -90,4 +90,4 @@ public class EntregaServices {
     public void deletar(Integer id) {
         repository.deleteById(id);
     }
-}
+} 
