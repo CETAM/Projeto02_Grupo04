@@ -40,7 +40,7 @@ public class ProdutoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(novoProduto);
     }
 
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public ResponseEntity<Produto> atualizar(@PathVariable Integer id, @RequestBody Produto produtoDetalhes) {
         if (service.naoExistePorId(id)) {
             return ResponseEntity.notFound().build();
