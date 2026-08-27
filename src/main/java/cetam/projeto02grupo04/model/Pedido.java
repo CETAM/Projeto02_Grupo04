@@ -13,6 +13,7 @@ public class Pedido {
     @Column(name = "id_pedido")
     private Integer idPedido;
 
+
     @ManyToOne
     @JoinColumn(name = "id_pessoa", nullable = false)
     private Pessoa pessoa;

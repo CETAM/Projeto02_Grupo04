@@ -1,5 +1,6 @@
+
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" Integer="pt-BR">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,6 @@
     <!-- Remixicon -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <!-- CSS estático do Spring -->
-
     <link rel="stylesheet" th:href="@{/custom.css}">
 </head>
 <body>
@@ -23,53 +23,72 @@
     <div class="header-container">
 
         <!-- 1. Logo na Esquerda -->
-        <a href="index.html" class="logo-box">
+        <a th:href="@{/}" href="index.html" class="logo-box">
             <img th:src="@{/img/logo.png}" src="logo.png" alt="Linda Moda Logo" class="logo-img">
         </a>
 
         <!-- 2. Menu Centralizado -->
         <nav>
             <ul class="nav-menu">
-                <li><a href="index.html" class="active">Novas Coleções</a></li>
+                <li><a th:href="@{/}" class="active">Novas Coleções</a></li>
                 <li><a href="#">Vestidos</a></li>
                 <li><a href="#">Saias</a></li>
                 <li><a href="#">Blusas</a></li>
                 <li><a href="#">Sobre Nós</a></li>
-                <li><a th:href="@{/dashboard}" href="dashboard.html">Dashboard</a></li>
+                <li><a th:href="@{/produtos/dashboard}" href="dashboard.html">Dashboard</a></li>
             </ul>
         </nav>
 
-        <!-- 3. Ícones Elegantes (SVG Inline) -->
+        <!-- 3. Ícones Elegantes com Links do Back-end -->
         <div class="header-icons">
-            <!-- Busca -->
-            <a href="#" class="icon-btn" title="Buscar">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-            </a>
+            <!-- 1. Ícone de Busca -->
+            <form th:action="@{/produtos/busca}" method="get" style="display: flex; align-items: center; gap: 6px;">
+                <input type="text" name="nome" placeholder="Buscar..." style="padding: 6px 10px; border-radius: 6px; border: 1px solid #ccc; outline: none; font-size: 14px;" />
+                <button type="submit" class="icon-btn search-btn" title="Buscar" style="background: none; border: none; cursor: pointer; display: flex; align-items: center; padding: 0;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+            </form>
 
-            <!-- Usuário -->
-            <a href="#" class="icon-btn" title="Minha Conta">
+            <!-- 2. Ícone de Minha Conta -->
+            <a th:href="@{/clientes/conta}" class="icon-btn user-btn" title="Minha Conta">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                     <circle cx="12" cy="7" r="4"></circle>
                 </svg>
             </a>
 
-            <!-- Sacola de Compras -->
-            <a href="#" class="icon-btn cart-btn" title="Carrinho">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <!-- 3. Ícone da Sacola / Carrinho -->
+            <a href="javascript:void(0);" onclick="abrirPainelCarrinho()" class="icon-btn cart-btn" title="Carrinho" style="position: relative; display: inline-block;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                     <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
                     <line x1="3" y1="6" x2="21" y2="6"></line>
                     <path d="M16 10a4 4 0 0 1-8 0"></path>
                 </svg>
-                <span class="cart-badge">1</span>
+                <span id="contador-carrinho" style="position: absolute; top: -6px; right: -8px; background-color: #b06d63; color: white; border-radius: 50%; padding: 2px 6px; font-size: 11px; font-weight: bold;">0</span>
             </a>
         </div>
 
+        <!-- Painel Lateral da Sacola -->
+        <div id="painel-carrinho" style="display: none; position: fixed; top: 0; right: 0; width: 320px; height: 100%; background: white; box-shadow: -2px 0 10px rgba(0,0,0,0.2); z-index: 1000; padding: 20px; box-sizing: border-box;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
+                <h3 style="margin: 0;">Sua Sacola</h3>
+                <button onclick="fecharPainelCarrinho()" style="background: none; border: none; font-size: 18px; cursor: pointer;">✕</button>
+            </div>
+
+            <div id="itens-do-carrinho" style="margin-top: 15px; max-height: 70vh; overflow-y: auto;">
+                <!-- Os produtos aparecem aqui via JS -->
+            </div>
+
+            <div style="position: absolute; bottom: 20px; left: 20px; right: 20px;">
+                <h4 id="valor-total-carrinho">Total: R$ 0,00</h4>
+            </div>
+        </div>
     </div>
 </header>
+
 <!-- CONTEÚDO PRINCIPAL DO PRODUTO -->
 <main class="main-container">
 
@@ -98,7 +117,7 @@
                 <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=200&q=80" alt="Calça Jeans">
             </div>
 
-            <!-- 3. CAMISA/BLUSA (MULHER) -->
+            <!-- 3. CAMISA/BLUSA -->
             <div class="thumb" onclick="selectProduct(this,
                 'https://images.unsplash.com/photo-1598554747436-c9293d6a588f?auto=format&fit=crop&w=800&q=80',
                 'CAMISA FEMININA BRANCA - Linda Moda',
@@ -155,10 +174,17 @@
 
         <!-- Botões de Ação -->
         <div class="action-buttons">
-            <button class="btn-add-cart">
+            <!-- Botão configurado sem <form> para não acionar o Spring/Hibernate diretamente -->
+            <button type="button"
+                    class="btn-add-cart btn-adicionar"
+                    id="btnAdicionarPrincipal"
+                    data-nome="VESTIDO MIDI ROSE - Linda Moda"
+                    data-preco="149.90"
+                    data-img="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80">
                 <i class="ri-shopping-bag-3-line"></i> Adicionar ao Carrinho
             </button>
-            <button class="btn-wishlist">
+
+            <button type="button" class="btn-wishlist">
                 <i class="ri-heart-line"></i> Favoritos
             </button>
         </div>
@@ -210,23 +236,120 @@
         &copy; 2026 Linda Moda. Todos os direitos reservados.
     </div>
 </footer>
-
-<!-- SCRIPT PARA TROCAR IMAGEM, TÍTULO, PREÇO E DESCRIÇÃO -->
+<!-- SCRIPTS DE LÓGICA DO CARRINHO (COM REMOÇÃO E LIMPEZA) -->
 <script>
-    function selectProduct(element, imageUrl, title, price, description) {
-        // Atualiza a imagem principal
-        document.getElementById('mainImage').src = imageUrl;
+    // Carrega o carrinho armazenado no navegador
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-        // Atualiza os textos do produto do lado direito
-        document.getElementById('productTitle').innerText = title;
-        document.getElementById('productPrice').innerText = price;
-        document.getElementById('productDescription').innerText = description;
-
-        // Destaca a miniatura selecionada com a borda ativa
-        const thumbs = document.querySelectorAll('.thumb');
-        thumbs.forEach(thumb => thumb.classList.remove('active'));
-        element.classList.add('active');
+    // 1. Atualiza o contador numérico no ícone da sacola
+    function atualizarContador() {
+        const contador = document.getElementById('contador-carrinho');
+        if (contador) {
+            const totalItens = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
+            contador.innerText = totalItens;
+        }
     }
+
+    // 2. Renderiza o conteúdo do painel com botões para remover itens
+    function renderizarCarrinho() {
+        const container = document.getElementById('itens-do-carrinho');
+        let totalGeral = 0;
+
+        if (!container) return;
+        container.innerHTML = '';
+
+        if (carrinho.length === 0) {
+            container.innerHTML = '<p style="text-align: center; color: #666; margin-top: 20px;">Sua sacola está vazia.</p>';
+        } else {
+            // Botão para limpar toda a sacola de uma vez
+            container.innerHTML += `
+                <div style="text-align: right; margin-bottom: 10px;">
+                    <button onclick="limparCarrinho()" style="background: none; border: none; color: #e74c3c; cursor: pointer; font-size: 12px; text-decoration: underline;">
+                        Esvaziar sacola
+                    </button>
+                </div>
+            `;
+
+            carrinho.forEach((item, index) => {
+                const subtotal = item.preco * item.quantidade;
+                totalGeral += subtotal;
+                container.innerHTML += `
+                    <div style="display: flex; gap: 10px; margin-bottom: 15px; align-items: center; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px;">
+                        <img src="${item.img}" style="width: 50px; height: 65px; object-fit: cover; border-radius: 4px;" alt="${item.nome}">
+                        <div style="flex-grow: 1;">
+                            <p style="margin: 0; font-weight: bold; font-size: 13px; color: #333;">${item.nome}</p>
+                            <small style="color: #666;">Qtd: ${item.quantidade} x R$ ${item.preco.toFixed(2).replace('.', ',')}</small>
+                            <br>
+                            <button onclick="removerItem(${index})" style="background: none; border: none; color: #999; cursor: pointer; font-size: 11px; padding: 0; margin-top: 4px; text-decoration: underline;">
+                                Tiras/Remover
+                            </button>
+                        </div>
+                        <strong style="font-size: 13px; color: #b06d63;">R$ ${subtotal.toFixed(2).replace('.', ',')}</strong>
+                    </div>
+                `;
+            });
+        }
+
+        const elementoTotal = document.getElementById('valor-total-carrinho');
+        if (elementoTotal) {
+            elementoTotal.innerText = 'Total: R$ ' + totalGeral.toFixed(2).replace('.', ',');
+        }
+    }
+
+    // 3. Remove apenas 1 produto específico da lista
+    function removerItem(index) {
+        carrinho.splice(index, 1);
+        salvarEAtualizar();
+    }
+
+    // 4. Apaga todos os produtos da sacola para poder colocar outros
+    function limparCarrinho() {
+        carrinho = [];
+        salvarEAtualizar();
+    }
+
+    // Auxiliar para salvar no navegador e atualizar a tela
+    function salvarEAtualizar() {
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        atualizarContador();
+        renderizarCarrinho();
+    }
+
+    // 5. Funções de controle do painel lateral
+    function abrirPainelCarrinho() {
+        renderizarCarrinho();
+        document.getElementById('painel-carrinho').style.display = 'block';
+    }
+
+    function fecharPainelCarrinho() {
+        document.getElementById('painel-carrinho').style.display = 'none';
+    }
+
+    // 6. Evento de clique para adicionar ao carrinho
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.btn-adicionar').forEach(botao => {
+            botao.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const nome = this.getAttribute('data-nome') || "Produto Selecionado";
+                const preco = parseFloat(this.getAttribute('data-preco')) || 0.00;
+                const img = this.getAttribute('data-img') || "";
+
+                const itemExistente = carrinho.find(item => item.nome === nome);
+                if (itemExistente) {
+                    itemExistente.quantidade += 1;
+                } else {
+                    carrinho.push({ nome, preco, img, quantidade: 1 });
+                }
+
+                localStorage.setItem('carrinho', JSON.stringify(carrinho));
+                atualizarContador();
+            });
+        });
+
+        atualizarContador();
+    });
 </script>
 
 </body>

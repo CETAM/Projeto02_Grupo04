@@ -19,4 +19,9 @@ public class HomeController {
     public String dashboard() {
         return "dashboard";
     }
+
+    @GetMapping("/clientes/conta")
+    public String contaCliente() {
+        return "clientes/clientes"; // Pasta 'clientes' + arquivo 'clientes.html'
+    }
 }
