@@ -8,6 +8,20 @@
 <body>
 
  <h1>Projeto em Andamento</h1>
+ <!-- Botões de Ação -->
+ <div class="action-buttons">
+
+     <!-- COLOQUE O FORMULÁRIO AQUI: -->
+     <form th:action="@{/pedidos/adicionar}" method="post" style="display: inline-block;">
+         <button type="submit" class="btn-add-cart">
+             <i class="ri-shopping-bag-3-line"></i> Adicionar ao Carrinho
+         </button>
+     </form>
+
+     <button type="button" class="btn-wishlist">
+         <i class="ri-heart-line"></i> Favoritos
+     </button>
+ </div>
 
 </body>
 </html>
