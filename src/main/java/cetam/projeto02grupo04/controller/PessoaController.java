@@ -12,6 +12,7 @@ public class PessoaController {
 
     private final PessoaServices services;
 
+
     public PessoaController(PessoaServices services) {
         this.services = services;
     }
@@ -26,12 +27,12 @@ public class PessoaController {
     }
 
     @PostMapping
-    public Pessoa salvar(@RequestBody Pessoa pessoa) {
-        return services.salvar(pessoa);
+    public String salvar(Pessoa pessoa) {
+        services.salvar(pessoa);
+        return "Pessoa salva com sucesso!";
     }
 
     @DeleteMapping("/{id}")
     public void deletar(@PathVariable Integer id) {
-        services.deletar(id);
-    }
+        services.deletar(id);  }
 }

@@ -56,7 +56,7 @@ CREATE TABLE estoque (
                          CONSTRAINT fk_id_produto
                              FOREIGN KEY (id_produto)
                                  REFERENCES produto(id_produto)
-)
+
 
 --
 -- Table structure for table `categoria`
