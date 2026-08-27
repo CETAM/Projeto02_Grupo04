@@ -45,6 +45,7 @@ public class ProdutoController {
         if (service.naoExistePorId(id)) {
             return ResponseEntity.notFound().build();
         }
+
         produtoDetalhes.setId(id);
         Produto atualizado = service.salvar(produtoDetalhes);
         return ResponseEntity.ok(atualizado);
