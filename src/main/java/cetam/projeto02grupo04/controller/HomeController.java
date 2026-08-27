@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
+
     // Abre o index.html quando acessar http://localhost:8080/
     /*
     //@GetMapping({"/", "/index"})
@@ -17,5 +18,10 @@ public class HomeController {
     @GetMapping("/dashboard")
     public String dashboard() {
         return "dashboard";
+    }
+
+    @GetMapping("/clientes/conta")
+    public String contaCliente() {
+        return "clientes/clientes"; // Pasta 'clientes' + arquivo 'clientes.html'
     }
 }

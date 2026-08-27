@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -22,23 +23,17 @@ public class ProdutoController {
         return service.listarTodos();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Produto> buscarPorId(@PathVariable Integer id) {
-        return service.buscarPorId(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
+    @GetMapping("/busca")
+    public ModelAndView buscarPorNome(@RequestParam("nome") String nome) {
+        // Muda de "detalhes-produto" para "index"
+        ModelAndView mv = new ModelAndView("index");
 
-    @GetMapping("/nome/{nome}")
-    public ResponseEntity<List<Produto>> buscarPorNome(@PathVariable String nome) {
-        return ResponseEntity.ok(service.buscarPorNome(nome));
-    }
+        List<Produto> resultado = service.buscarPorNome(nome);
+        mv.addObject("produtos", resultado);
+        mv.addObject("termoBusca", nome);
 
-    @GetMapping("/categoria/{idCategoria}")
-    public ResponseEntity<List<Produto>> buscarPorCategoria(@PathVariable Integer idCategoria) {
-        return ResponseEntity.ok(service.buscarPorCategoria(idCategoria));
+        return mv;
     }
-
     @PostMapping
     public ResponseEntity<Produto> cadastrar(@RequestBody Produto produto) {
         Produto novoProduto = service.salvar(produto);
