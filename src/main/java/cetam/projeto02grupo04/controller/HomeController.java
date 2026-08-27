@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
+
     // Abre o index.html quando acessar http://localhost:8080/
     /*
     //@GetMapping({"/", "/index"})
